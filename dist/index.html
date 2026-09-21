@@ -193,35 +193,43 @@
     .figma-hero-copy p { width:min(602px,100%); margin:16px auto 0; color:#666; font-size:16px; line-height:24px; }
     .figma-cta { display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:12px 24px; color:#fdfaf7; background:linear-gradient(#000,rgba(0,0,0,.8)); border:2px solid #fff; border-radius:8px; box-shadow:0 2px 2px rgba(0,0,0,.04); text-decoration:none; font-size:16px; }
     .figma-cta img { width:16px; height:16px; }
-    .hero-gallery { position:absolute; z-index:4; left:50%; top:426px; width:1170px; height:440px; transform:translateX(-50%); perspective:1200px; }
+    .hero-gallery { --wash:#dcefff; position:absolute; z-index:4; left:50%; top:426px; width:1170px; height:440px; transform:translateX(-50%); perspective:1200px; }
+    .hero-gallery::before { content:""; position:absolute; z-index:-1; width:1280px; height:620px; left:50%; top:-205px; transform:translateX(-50%); background:radial-gradient(ellipse,var(--wash) 0%,color-mix(in srgb,var(--wash) 42%,transparent) 42%,transparent 74%); filter:blur(28px); opacity:.72; transition:background 1.1s ease; }
     .hero-shot { position:absolute; margin:0; padding:8px; background:#fff; border:1px solid rgba(0,0,0,.2); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.04); transform-style:preserve-3d; transition:filter .65s ease,opacity .65s ease,transform .75s cubic-bezier(.2,.8,.2,1); overflow:hidden; }
-    .hero-shot img { width:100%; height:100%; object-fit:cover; border-radius:7px; display:block; }
+    .hero-shot img { position:absolute; inset:8px; width:calc(100% - 16px); height:calc(100% - 16px); object-fit:cover; border-radius:7px; display:block; backface-visibility:hidden; }
     .hero-shot.left { left:0; top:0; width:377px; height:377px; z-index:1; animation:figmaFloatLeft 8s ease-in-out infinite; }
     .hero-shot.center { left:278px; top:78px; width:620px; height:358px; z-index:3; animation:figmaFloatCenter 9.5s ease-in-out infinite; }
     .hero-shot.right { right:0; top:4px; width:292px; height:292px; z-index:2; animation:figmaFloatRight 7.5s ease-in-out infinite; }
-    .hero-gallery.transitioning .hero-shot { filter:blur(18px) saturate(1.55); opacity:.18; animation-play-state:paused; }
-    .hero-gallery.transitioning .hero-shot.left { transform:translate3d(-18px,8px,-110px) rotateY(6deg) scale(.96); }
-    .hero-gallery.transitioning .hero-shot.center { transform:translate3d(0,18px,-170px) rotateX(4deg) scale(.94); }
-    .hero-gallery.transitioning .hero-shot.right { transform:translate3d(18px,8px,-90px) rotateY(-6deg) scale(.96); }
-    .hero-gallery.revealing .hero-shot { opacity:0; filter:blur(20px); animation:figmaReveal .9s cubic-bezier(.16,1,.3,1) forwards; }
-    .hero-gallery.revealing .hero-shot.left { animation-delay:70ms; }
-    .hero-gallery.revealing .hero-shot.center { animation-delay:190ms; }
-    .hero-gallery.revealing .hero-shot.right { animation-delay:320ms; }
+    .hero-gallery.morphing .hero-shot { animation-play-state:paused; }
+    .hero-shot img.scene-old { animation:wixOldCenter 1.05s cubic-bezier(.4,0,.2,1) forwards; }
+    .hero-shot img.scene-new { opacity:0; filter:blur(18px); animation:wixNewCenter 1.05s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-shot.left img.scene-old { animation-name:wixOldLeft; }
+    .hero-shot.left img.scene-new { animation-name:wixNewLeft; }
+    .hero-shot.right img.scene-old { animation-name:wixOldRight; }
+    .hero-shot.right img.scene-new { animation-name:wixNewRight; }
+    .hero-shot.left img.scene-new { animation-delay:70ms; }
+    .hero-shot.center img.scene-new { animation-delay:120ms; }
+    .hero-shot.right img.scene-new { animation-delay:35ms; }
     .figma-prompt { position:absolute; z-index:9; left:506px; top:310px; width:387px; height:97px; padding:12px 16px; border:1px solid rgba(222,222,222,.3); border-radius:12px; background:linear-gradient(#fff,rgba(255,255,255,.9)); box-shadow:0 2px 4px rgba(0,0,0,.04); display:flex; flex-direction:column; justify-content:space-between; }
     .figma-prompt-text { font-size:16px; color:#1a1a1a; white-space:nowrap; overflow:hidden; }
     .figma-prompt-controls { display:flex; justify-content:space-between; align-items:center; }
     .figma-prompt-controls img:first-child { width:17px; height:17px; }
     .submit-pill { width:36px; height:36px; border-radius:50%; background:#1a1a1a; display:grid; place-items:center; }
     .submit-pill img { width:18px; height:18px; }
-    .figma-thermal { position:absolute; z-index:8; inset:0; width:100%; height:100%; opacity:0; pointer-events:none; mix-blend-mode:multiply; image-rendering:pixelated; }
-    .figma-thermal.active { opacity:.82; }
+    .figma-thermal { position:absolute; z-index:8; inset:0; width:100%; height:100%; opacity:0; pointer-events:none; mix-blend-mode:soft-light; image-rendering:pixelated; }
+    .figma-thermal.active { opacity:.16; }
     .hero-progress { position:absolute; z-index:10; left:50%; bottom:18px; transform:translateX(-50%); display:flex; gap:7px; }
     .hero-progress button { width:28px; height:3px; padding:0; border:0; background:#d2d2d2; cursor:pointer; transition:.25s; }
     .hero-progress button.active { width:48px; background:#171717; }
     @keyframes figmaFloatLeft { 0%,100%{transform:translate3d(0,0,0) rotate(-.25deg)} 50%{transform:translate3d(-5px,-9px,18px) rotate(.25deg)} }
     @keyframes figmaFloatCenter { 0%,100%{transform:translate3d(0,0,42px)} 50%{transform:translate3d(0,-11px,58px)} }
     @keyframes figmaFloatRight { 0%,100%{transform:translate3d(0,0,18px) rotate(.2deg)} 50%{transform:translate3d(5px,-8px,30px) rotate(-.3deg)} }
-    @keyframes figmaReveal { from{opacity:0;filter:blur(20px);transform:translateY(18px) scale(.975)} to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)} }
+    @keyframes wixOldCenter { 0%{opacity:1;filter:blur(0);transform:translate3d(0,0,0) scale(1)} 58%{opacity:.32;filter:blur(12px);transform:translate3d(0,8px,-85px) scale(.965)} 100%{opacity:0;filter:blur(22px);transform:translate3d(0,14px,-130px) scale(.94)} }
+    @keyframes wixNewCenter { 0%{opacity:0;filter:blur(20px);transform:translate3d(0,-6px,-110px) scale(.95)} 42%{opacity:.36;filter:blur(11px)} 100%{opacity:1;filter:blur(0);transform:translate3d(0,0,0) scale(1)} }
+    @keyframes wixOldLeft { 0%{opacity:1;filter:blur(0);transform:translateX(0) scale(1)} 100%{opacity:0;filter:blur(20px);transform:translateX(-42px) scale(.9)} }
+    @keyframes wixNewLeft { 0%{opacity:0;filter:blur(19px);transform:translateX(48px) scale(.91)} 100%{opacity:1;filter:blur(0);transform:translateX(0) scale(1)} }
+    @keyframes wixOldRight { 0%{opacity:1;filter:blur(0);transform:translateX(0) scale(1)} 100%{opacity:0;filter:blur(20px);transform:translateX(42px) scale(.9)} }
+    @keyframes wixNewRight { 0%{opacity:0;filter:blur(19px);transform:translateX(-48px) scale(.91)} 100%{opacity:1;filter:blur(0);transform:translateX(0) scale(1)} }
     @media (max-width:900px) {
       header .brand { width:auto; }
       header .navlinks > a:not(.nav-start) { display:none; }
@@ -365,11 +373,11 @@
   </script>
   <script>
     const siteConcepts = [
-      { key:'realestate', prompt:'Make a website for my real estate agency...' },
-      { key:'atelier', prompt:'Create a bold portfolio for my creative agency...' },
-      { key:'designer', prompt:'Design an elegant site for my personal brand...' },
-      { key:'fashion', prompt:'Build a high-energy store for my fashion label...' },
-      { key:'furniture', prompt:'Make a refined shop for my furniture studio...' }
+      { key:'realestate', prompt:'Make a website for my real estate agency...', wash:'#e2ebf8' },
+      { key:'atelier', prompt:'Create a bold portfolio for my creative agency...', wash:'#f3d8ca' },
+      { key:'designer', prompt:'Design an elegant site for my personal brand...', wash:'#ead4dc' },
+      { key:'fashion', prompt:'Build a high-energy store for my fashion label...', wash:'#d8edff' },
+      { key:'furniture', prompt:'Make a refined shop for my furniture studio...', wash:'#f0e5cf' }
     ];
     const gallery=document.querySelector('#hero-gallery');
     const heroPrompt=document.querySelector('#hero-prompt');
@@ -379,12 +387,28 @@
     const progress=document.querySelector('#hero-progress');
     const thermalCanvas=document.querySelector('#figma-thermal');
     const thermalCtx=thermalCanvas.getContext('2d',{alpha:true});
-    let conceptIndex=0, cycleTimer, animationFrame;
+    let conceptIndex=0, cycleTimer, animationFrame, changing=false;
 
     function setImages(c){
       shotLeft.src=`assets/hero/${c.key}-left.png`;
       shotCenter.src=`assets/hero/${c.key}-center.png`;
       shotRight.src=`assets/hero/${c.key}-right.png`;
+      gallery.style.setProperty('--wash',c.wash);
+      progress.querySelectorAll('button').forEach((button,i)=>button.classList.toggle('active',i===conceptIndex));
+    }
+
+    async function morphImages(c){
+      gallery.classList.add('morphing');
+      gallery.style.setProperty('--wash',c.wash);
+      const targets=[[document.querySelector('#shot-left'),'left'],[document.querySelector('#shot-center'),'center'],[document.querySelector('#shot-right'),'right']];
+      const incoming=targets.map(([current,position])=>{
+        current.classList.add('scene-old');
+        const next=current.cloneNode(); next.id=current.id; current.removeAttribute('id'); next.src=`assets/hero/${c.key}-${position}.png`; next.className='scene-new'; current.parentElement.appendChild(next); return [current,next];
+      });
+      thermalDither();
+      await new Promise(r=>setTimeout(r,1180));
+      incoming.forEach(([old,next])=>{ old.remove(); next.className=''; });
+      gallery.classList.remove('morphing');
       progress.querySelectorAll('button').forEach((button,i)=>button.classList.toggle('active',i===conceptIndex));
     }
 
@@ -413,12 +437,13 @@
     }
 
     async function changeConcept(next=(conceptIndex+1)%siteConcepts.length){
+      if(changing) return;
+      changing=true;
       clearTimeout(cycleTimer); conceptIndex=next; const c=siteConcepts[conceptIndex];
-      await typePrompt(c.prompt); await new Promise(r=>setTimeout(r,220));
-      gallery.classList.add('transitioning'); thermalDither();
-      await new Promise(r=>setTimeout(r,610)); setImages(c); gallery.classList.remove('transitioning'); gallery.classList.add('revealing');
-      await new Promise(r=>setTimeout(r,1250)); gallery.classList.remove('revealing');
-      cycleTimer=setTimeout(()=>changeConcept(),3200);
+      await typePrompt(c.prompt); await new Promise(r=>setTimeout(r,140));
+      await morphImages(c);
+      changing=false;
+      cycleTimer=setTimeout(()=>changeConcept(),2700);
     }
 
     siteConcepts.forEach((_,i)=>{ const button=document.createElement('button'); button.type='button'; button.setAttribute('aria-label',`Show website example ${i+1}`); button.addEventListener('click',()=>changeConcept(i)); progress.appendChild(button); });
