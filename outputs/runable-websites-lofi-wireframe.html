@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Runable Websites — Low-fidelity landing page wireframe</title>
+  <meta name="description" content="Low-fidelity wireframe for a Runable AI website builder landing page, structured for search, answer engines, and generative discovery.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171717'/%3E%3Cpath d='M17 16h22c8 0 12 4 12 11 0 5-3 9-9 10l10 11H39L29 38v10H17V16zm12 9v6h9c2 0 3-1 3-3s-1-3-3-3h-9z' fill='white'/%3E%3C/svg%3E">
+  <style>
+    :root { --ink:#171717; --muted:#666; --line:#b8b8b8; --paper:#f6f6f3; --card:#fff; --wash:#e7e7e3; --dark:#202020; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.45; }
+    button, input { font:inherit; }
+    button, a { -webkit-tap-highlight-color:transparent; }
+    a { color:inherit; }
+    .skip { position:absolute; left:-9999px; }
+    .skip:focus { left:1rem; top:1rem; background:#fff; padding:.8rem 1rem; z-index:50; }
+    .shell { width:min(1180px, calc(100% - 40px)); margin:auto; }
+    .eyebrow { font:700 .78rem/1 Arial, sans-serif; letter-spacing:.1em; text-transform:uppercase; color:#555; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { font-size:clamp(3.3rem, 8.5vw, 8rem); line-height:.88; letter-spacing:-.065em; max-width:1100px; margin-bottom:1.5rem; }
+    h2 { font-size:clamp(2.3rem, 5vw, 4.9rem); line-height:.96; letter-spacing:-.045em; margin-bottom:1.2rem; max-width:850px; }
+    h3 { font-size:1.15rem; line-height:1.2; }
+    .lede { max-width:660px; font-size:clamp(1.05rem, 2vw, 1.4rem); color:#3e3e3e; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:48px; border:1px solid var(--ink); padding:.8rem 1.2rem; background:var(--ink); color:#fff; text-decoration:none; cursor:pointer; }
+    .btn.secondary { background:transparent; color:var(--ink); }
+    .btn:hover { transform:translateY(-2px); }
+    .btn:focus-visible, summary:focus-visible, input:focus-visible { outline:3px solid #858585; outline-offset:3px; }
+    .note { border:1px dashed #888; padding:.55rem .75rem; color:#555; font-size:.78rem; background:#fafafa; }
+    header { position:sticky; top:0; z-index:20; background:rgba(246,246,243,.94); border-bottom:1px solid var(--ink); backdrop-filter:blur(10px); }
+    nav { height:68px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { font-weight:800; font-size:1.2rem; text-decoration:none; }
+    .navlinks { display:flex; gap:1.5rem; font-size:.92rem; align-items:center; }
+    .navlinks a { text-decoration:none; }
+    .hero { padding:clamp(4rem, 9vw, 8rem) 0 0; overflow:hidden; }
+    .hero-top { display:grid; gap:2rem; }
+    .hero-actions { display:flex; gap:.8rem; align-items:center; flex-wrap:wrap; }
+    .hero-stage { margin-top:4rem; height:clamp(420px, 58vw, 680px); background:#deded9; border:1px solid var(--ink); position:relative; overflow:hidden; }
+    .browser { position:absolute; width:72%; height:74%; background:#fff; border:2px solid var(--ink); left:14%; top:10%; box-shadow:22px 22px 0 rgba(0,0,0,.13); animation:float 5s ease-in-out infinite; }
+    .browserbar { height:38px; border-bottom:1px solid var(--ink); display:flex; align-items:center; padding:0 12px; gap:6px; }
+    .dot { width:8px; height:8px; border:1px solid var(--ink); border-radius:50%; }
+    .mocksite { display:grid; grid-template-columns:1.2fr .8fr; gap:24px; padding:7%; height:calc(100% - 38px); }
+    .lines span { display:block; background:#c7c7c2; height:12px; margin-bottom:12px; }
+    .lines span:nth-child(1) { height:26px; width:76%; background:#777; }
+    .lines span:nth-child(2) { width:90%; }
+    .lines span:nth-child(3) { width:66%; }
+    .mock-img { background:#aaa; min-height:180px; display:grid; place-items:center; color:#fff; font-size:.8rem; }
+    .prompt { position:absolute; width:min(520px, 80%); left:50%; bottom:6%; transform:translateX(-50%); background:#fff; border:2px solid var(--ink); padding:1rem; display:flex; justify-content:space-between; gap:1rem; box-shadow:10px 10px 0 rgba(0,0,0,.15); }
+    .typing::after { content:""; display:inline-block; width:1px; height:1em; background:#111; margin-left:3px; vertical-align:-2px; animation:blink .8s steps(2) infinite; }
+    .metrics { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--ink); }
+    .metric { padding:2.2rem 4vw; border-right:1px solid var(--ink); min-height:150px; }
+    .metric:last-child { border-right:0; }
+    .metric strong { display:block; font-size:clamp(2.4rem, 5vw, 5rem); letter-spacing:-.06em; line-height:1; }
+    .section { padding:clamp(5rem, 10vw, 9rem) 0; border-bottom:1px solid var(--ink); }
+    .section-head { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:end; margin-bottom:3.5rem; }
+    .process { display:grid; grid-template-columns:.8fr 1.2fr; gap:5rem; }
+    .steps { border-top:1px solid var(--ink); }
+    .step { display:grid; grid-template-columns:52px 1fr; gap:1rem; padding:1.4rem 0; border-bottom:1px solid var(--ink); opacity:.48; cursor:pointer; transition:.25s; }
+    .step.active, .step:hover { opacity:1; }
+    .step b { font-size:.78rem; }
+    .process-stage { background:#ddd; border:1px solid var(--ink); min-height:520px; padding:9%; display:flex; align-items:center; }
+    .process-card { background:#fff; border:2px solid var(--ink); width:100%; min-height:310px; padding:2rem; box-shadow:16px 16px 0 #aaa; }
+    .process-card .fake-row { border:1px solid #999; padding:1rem; margin-top:1rem; }
+    .template-strip { display:flex; gap:1.1rem; overflow:auto; padding:1rem max(20px, calc((100vw - 1180px)/2)) 2rem; scroll-snap-type:x mandatory; }
+    .template { flex:0 0 min(66vw, 430px); height:540px; border:1px solid var(--ink); background:#fff; padding:14px; scroll-snap-align:start; }
+    .template-art { height:84%; background:linear-gradient(135deg,#d5d5d0 0 50%,#bcbcb7 50%); display:grid; place-items:center; font-weight:700; }
+    .template-meta { display:flex; justify-content:space-between; padding-top:1rem; }
+    .tabs { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:2rem; }
+    .tab { border:1px solid var(--ink); background:transparent; padding:.65rem .9rem; cursor:pointer; }
+    .tab.active { background:var(--ink); color:#fff; }
+    .showcase { display:grid; grid-template-columns:.85fr 1.15fr; min-height:570px; border:1px solid var(--ink); }
+    .showcase-copy { padding:clamp(2rem,5vw,4rem); background:#fff; display:flex; flex-direction:column; justify-content:space-between; }
+    .showcase-art { background:#c9c9c4; display:grid; place-items:center; padding:12%; }
+    .mini-screen { width:100%; height:70%; min-height:300px; background:#fff; border:2px solid var(--ink); box-shadow:16px 16px 0 #999; display:grid; place-items:center; text-align:center; }
+    .feature-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--ink); border:1px solid var(--ink); }
+    .feature { background:var(--paper); min-height:390px; padding:2rem; display:flex; flex-direction:column; justify-content:space-between; }
+    .feature-visual { height:190px; border:1px solid var(--ink); background:#ddd; display:grid; place-items:center; text-align:center; padding:1rem; }
+    .domain { background:#242424; color:#fff; }
+    .domain .eyebrow, .domain .lede { color:#cfcfcf; }
+    .domain-search { margin-top:3rem; display:grid; grid-template-columns:1fr auto; background:#fff; border:2px solid #fff; max-width:850px; }
+    .domain-search input { border:0; min-height:68px; padding:0 1.2rem; min-width:0; }
+    .domain-search button { border:0; background:#d7d7d2; color:#111; padding:0 1.5rem; cursor:pointer; }
+    .domain-result { min-height:1.5rem; margin-top:1rem; color:#ddd; }
+    .mobile-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:6rem; align-items:center; }
+    .devices { min-height:600px; background:#ddd; border:1px solid var(--ink); display:flex; align-items:center; justify-content:center; gap:2rem; padding:2rem; }
+    .phone { width:190px; height:390px; border:6px solid var(--ink); border-radius:28px; background:#fff; padding:24px 14px; transform:rotate(-5deg); box-shadow:14px 14px 0 #aaa; }
+    .dash { width:290px; height:350px; border:2px solid var(--ink); background:#fff; padding:1rem; transform:rotate(3deg); }
+    .ui-block { height:35px; background:#ccc; margin-bottom:12px; }
+    .ui-block.tall { height:110px; }
+    .plans { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--ink); }
+    .plan { padding:2rem; border-right:1px solid var(--ink); background:#fff; display:flex; flex-direction:column; min-height:470px; }
+    .plan:last-child { border-right:0; }
+    .plan.featured { background:#deded9; }
+    .price { font-size:3.2rem; letter-spacing:-.06em; margin:1rem 0; }
+    .plan ul { padding-left:1.2rem; }
+    .plan .btn { margin-top:auto; }
+    .billing { display:flex; align-items:center; gap:.75rem; margin-bottom:2rem; }
+    .switch { width:54px; height:30px; border:1px solid var(--ink); border-radius:20px; padding:3px; background:#fff; cursor:pointer; }
+    .switch i { display:block; width:22px; height:22px; border-radius:50%; background:var(--ink); transition:.2s; }
+    .switch.annual i { transform:translateX(24px); }
+    .faq { max-width:920px; margin-left:auto; }
+    details { border-top:1px solid var(--ink); }
+    details:last-child { border-bottom:1px solid var(--ink); }
+    summary { list-style:none; cursor:pointer; font-size:clamp(1.15rem,2vw,1.55rem); padding:1.4rem 3rem 1.4rem 0; position:relative; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:"+"; position:absolute; right:.5rem; }
+    details[open] summary::after { content:"−"; }
+    details p { max-width:700px; color:#444; padding-bottom:1.5rem; }
+    .cta { text-align:center; background:#d9d9d4; padding:clamp(5rem,10vw,10rem) 20px; border-bottom:1px solid var(--ink); }
+    .cta h2 { margin-left:auto; margin-right:auto; }
+    footer { background:#171717; color:#fff; padding:4rem 0 2rem; }
+    .footer-grid { display:grid; grid-template-columns:2fr repeat(4,1fr); gap:2rem; }
+    .footer-col a { display:block; color:#ccc; text-decoration:none; margin:.65rem 0; font-size:.9rem; }
+    .footer-bottom { border-top:1px solid #555; margin-top:3rem; padding-top:1.5rem; display:flex; justify-content:space-between; color:#aaa; font-size:.8rem; }
+    .annotation { position:fixed; right:16px; bottom:16px; z-index:30; background:#fff; border:1px solid var(--ink); padding:.6rem .8rem; cursor:pointer; box-shadow:5px 5px 0 #aaa; }
+    body.hide-notes .note { display:none; }
+    [data-reveal] { opacity:0; transform:translateY(24px); transition:.6s ease; }
+    [data-reveal].visible { opacity:1; transform:none; }
+    @keyframes float { 50% { transform:translateY(-9px); } }
+    @keyframes blink { 50% { opacity:0; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
+    @media (max-width:800px) {
+      .shell { width:min(100% - 28px, 1180px); }
+      .navlinks a:not(.btn) { display:none; }
+      .section-head,.process,.mobile-grid { grid-template-columns:1fr; gap:2rem; }
+      .hero-stage { height:430px; }
+      .browser { width:88%; left:6%; }
+      .mocksite { grid-template-columns:1fr; }
+      .mock-img { min-height:100px; }
+      .metrics { grid-template-columns:1fr; }
+      .metric { border-right:0; border-bottom:1px solid var(--ink); }
+      .metric:last-child { border-bottom:0; }
+      .showcase { grid-template-columns:1fr; }
+      .showcase-art { min-height:380px; }
+      .feature-grid,.plans { grid-template-columns:1fr; }
+      .plan { border-right:0; border-bottom:1px solid var(--ink); }
+      .plan:last-child { border-bottom:0; }
+      .devices { min-height:490px; gap:1rem; overflow:hidden; }
+      .phone { width:150px; height:320px; }
+      .dash { width:210px; }
+      .footer-grid { grid-template-columns:1fr 1fr; }
+      .footer-grid > div:first-child { grid-column:1/-1; }
+      .footer-bottom { flex-direction:column; gap:.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <nav class="shell" aria-label="Primary">
+      <a href="#top" class="brand">RUNABLE</a>
+      <div class="navlinks"><a href="#process">How it works</a><a href="#templates">Templates</a><a href="#pricing">Pricing</a><a class="btn" href="#cta">Build free →</a></div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell hero-top" data-reveal>
+        <div class="eyebrow">AI website builder</div>
+        <h1>A real website, from one clear idea.</h1>
+        <p class="lede">Describe the business. Runable plans the pages, writes the first draft, shapes the design, and gives you a site ready to publish.</p>
+        <div class="hero-actions"><a class="btn" href="#process">Build your website →</a><a class="btn secondary" href="#templates">Explore templates</a><span class="note">SEO: one descriptive H1 + outcome-first summary</span></div>
+      </div>
+      <div class="hero-stage" aria-label="Wireframe animation of a website being generated">
+        <div class="browser"><div class="browserbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="mocksite"><div class="lines"><span></span><span></span><span></span><button class="btn">Primary action</button></div><div class="mock-img">GENERATED VISUAL</div></div></div>
+        <div class="prompt"><span class="typing">Create a modern site for my neighborhood bakery</span><b>↑</b></div>
+      </div>
+      <div class="metrics" aria-label="Product proof points">
+        <div class="metric"><strong>1 prompt</strong><span>to start a complete site</span></div>
+        <div class="metric"><strong>Minutes</strong><span>from blank page to first draft</span></div>
+        <div class="metric"><strong>0 code</strong><span>needed to edit and publish</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="shell">
+        <div class="section-head" data-reveal><div><div class="eyebrow">01 / Creation flow</div><h2>Website creation that moves at the speed of thought.</h2></div><div><p class="lede">Move from a plain-language prompt to a tailored draft, then refine every detail without leaving the same workspace.</p><span class="note">AEO: concise definition directly answers “How does an AI website builder work?”</span></div></div>
+        <div class="process">
+          <div class="steps" role="tablist" aria-label="Creation steps">
+            <div class="step active" role="tab" tabindex="0" data-step="0"><b>01</b><div><h3>Describe the outcome</h3><p>Tell Runable what you do, who it is for, and what visitors should do next.</p></div></div>
+            <div class="step" role="tab" tabindex="0" data-step="1"><b>02</b><div><h3>Watch the site take shape</h3><p>Pages, copy, hierarchy, and visual direction arrive as one coherent first draft.</p></div></div>
+            <div class="step" role="tab" tabindex="0" data-step="2"><b>03</b><div><h3>Refine by asking</h3><p>Change a section, sharpen the tone, or add a workflow in natural language.</p></div></div>
+            <div class="step" role="tab" tabindex="0" data-step="3"><b>04</b><div><h3>Publish with confidence</h3><p>Connect a domain, check the essentials, and send the site live.</p></div></div>
+          </div>
+          <div class="process-stage"><div class="process-card"><div class="eyebrow" id="stage-label">PROMPT</div><h3 id="stage-title">What are you building?</h3><div class="fake-row" id="stage-copy">A calm, useful website for a neighborhood bakery with online ordering.</div><div class="fake-row">[ Suggested pages ] &nbsp; Home · Menu · About · Visit</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="templates">
+      <div class="shell section-head" data-reveal><div><div class="eyebrow">02 / Starting points</div><h2>Your blank page already knows where to begin.</h2></div><div><p class="lede">Start with AI or choose a proven structure. Either path becomes a site shaped around your audience and goal.</p><a class="btn secondary" href="#templates">Browse all templates →</a></div></div>
+      <div class="template-strip" aria-label="Template carousel">
+        <article class="template"><div class="template-art">LOCAL SERVICE</div><div class="template-meta"><b>Northline Studio</b><span>Preview →</span></div></article>
+        <article class="template"><div class="template-art">ONLINE STORE</div><div class="template-meta"><b>Field Objects</b><span>Preview →</span></div></article>
+        <article class="template"><div class="template-art">CONSULTANT</div><div class="template-meta"><b>Common Ground</b><span>Preview →</span></div></article>
+        <article class="template"><div class="template-art">PORTFOLIO</div><div class="template-meta"><b>Form / Function</b><span>Preview →</span></div></article>
+      </div>
+    </section>
+
+    <section class="section" id="showcase">
+      <div class="shell">
+        <div class="section-head" data-reveal><div><div class="eyebrow">03 / Business outcomes</div><h2>One website. Every move your business makes.</h2></div><p class="lede">Launch the experience you need today, then add what helps you sell, book, teach, or grow tomorrow.</p></div>
+        <div class="tabs" role="tablist"><button class="tab active" data-show="Store">Online store</button><button class="tab" data-show="Bookings">Bookings</button><button class="tab" data-show="Portfolio">Portfolio</button><button class="tab" data-show="Courses">Courses</button><button class="tab" data-show="Events">Events</button></div>
+        <div class="showcase"><div class="showcase-copy"><div><div class="eyebrow" id="show-kicker">ONLINE STORE</div><h2 id="show-title">Turn products into a store people trust.</h2><p id="show-copy">Present the range clearly, take secure payments, and keep the path from discovery to checkout simple.</p></div><a class="btn secondary" href="#pricing">Build this kind of site →</a></div><div class="showcase-art"><div class="mini-screen" id="show-art">[ Storefront prototype ]<br>product grid + cart + checkout</div></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="shell">
+        <div class="section-head" data-reveal><div><div class="eyebrow">04 / Editing</div><h2>Deep control, without the steep learning curve.</h2></div><p class="lede">Use AI for speed and direct editing for precision. Every choice stays yours.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><div class="feature-visual">[ Ask: “Make this section more premium” ]</div><div><h3>Create by conversation</h3><p>Describe the change you want and see it applied in context.</p></div></article>
+          <article class="feature"><div class="feature-visual">[ drag ↔ resize ↕ reorder ]</div><div><h3>Edit directly</h3><p>Move, resize, rewrite, and rearrange the details that matter.</p></div></article>
+          <article class="feature"><div class="feature-visual">[ reusable section library ]</div><div><h3>Add what comes next</h3><p>Bring in new sections and capabilities as your site grows.</p></div></article>
+          <article class="feature"><div class="feature-visual">Aa&nbsp;&nbsp; ● ● ● &nbsp;&nbsp; 16 / 24</div><div><h3>Keep the brand consistent</h3><p>Update type, color, spacing, and buttons across every page.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section domain" id="domain">
+      <div class="shell" data-reveal><div class="eyebrow">05 / Domain</div><h2>Find the address that makes your idea official.</h2><p class="lede">Search for a domain, connect one you already own, and publish with SSL and fast hosting included.</p><form class="domain-search" id="domain-form"><label class="skip" for="domain-input">Search for a domain</label><input id="domain-input" placeholder="Search yourbrand.com" autocomplete="off"><button type="submit">Search →</button></form><div class="domain-result" id="domain-result" aria-live="polite">Already have a domain? Connect it in a few steps.</div></div>
+    </section>
+
+    <section class="section" id="mobile">
+      <div class="shell mobile-grid">
+        <div data-reveal><div class="eyebrow">06 / Mobile control</div><h2>Keep the whole business within reach.</h2><p class="lede">See what is happening, make a quick update, and respond when it matters—from your phone or desktop.</p><h3>On your phone</h3><p>Review activity, update content, and act on new leads wherever the day takes you.</p><h3>From the dashboard</h3><p>Manage pages, domains, publishing, performance, and growth from one clear home.</p><a class="btn" href="#cta">Get started →</a></div>
+        <div class="devices" aria-label="Mobile and desktop dashboard wireframes"><div class="phone"><div class="ui-block"></div><div class="ui-block tall"></div><div class="ui-block"></div><div class="ui-block"></div></div><div class="dash"><div class="ui-block"></div><div class="ui-block tall"></div><div class="ui-block"></div><div class="ui-block"></div><div class="ui-block"></div></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="shell">
+        <div class="section-head" data-reveal><div><div class="eyebrow">07 / Pricing</div><h2>Start free. Upgrade when the site earns its place.</h2></div><p class="lede">Simple plans for first launches, growing businesses, and teams managing more than one site.</p></div>
+        <div class="billing"><button class="switch" id="billing-switch" aria-label="Toggle annual billing"><i></i></button><span id="billing-label">Monthly billing</span><span class="note">Annual pricing saves 20%</span></div>
+        <div class="plans">
+          <article class="plan"><div class="eyebrow">Free</div><h3>Find the shape of the idea.</h3><div class="price">$0</div><ul><li>Draft one website</li><li>Runable subdomain</li><li>Core AI creation tools</li><li>Community support</li></ul><a class="btn secondary" href="#cta">Start free</a></article>
+          <article class="plan featured"><div class="eyebrow">Launch · Most popular</div><h3>Publish a professional site.</h3><div class="price" data-monthly="15" data-annual="12">$15</div><ul><li>Custom domain connection</li><li>Hosting, SSL, and analytics</li><li>Full AI and visual editing</li><li>Forms, payments, and data</li></ul><a class="btn" href="#cta">Choose Launch</a></article>
+          <article class="plan"><div class="eyebrow">Scale</div><h3>Grow sites, work, and reach.</h3><div class="price" data-monthly="39" data-annual="31">$39</div><ul><li>Multiple published sites</li><li>Team collaboration</li><li>Advanced analytics</li><li>Priority support</li></ul><a class="btn secondary" href="#cta">Choose Scale</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="shell">
+        <div class="section-head"><div><div class="eyebrow">08 / FAQ</div><h2>Questions, answered clearly.</h2><span class="note">AEO/GEO: visible, concise answers + FAQ structured data</span></div></div>
+        <div class="faq">
+          <details><summary>What is Runable’s AI website builder?</summary><p>It is a no-code website creation tool that turns a plain-language brief into a working first draft, including page structure, copy, and design. You can then edit the result and publish it from the same workspace.</p></details>
+          <details><summary>Do I need coding or design experience?</summary><p>No. You can begin with a prompt or template, make changes in natural language, and adjust the design directly. Code is optional, not a requirement.</p></details>
+          <details><summary>Can I use my own domain?</summary><p>Yes. You can connect a domain you already own or search for a new one, then publish with SSL and hosting included on eligible plans.</p></details>
+          <details><summary>Can I optimize my website for Google and AI answers?</summary><p>Yes. The recommended workflow includes clear page titles, descriptive headings, useful answer blocks, metadata, alt text, structured data, and fast mobile-friendly pages for search and AI discovery.</p></details>
+          <details><summary>Can I sell products or take bookings?</summary><p>Yes. A Runable site can be shaped around commerce, bookings, services, portfolios, courses, events, lead capture, and other common business goals.</p></details>
+          <details><summary>How quickly can I publish?</summary><p>You can create a strong first draft in minutes. Publishing time depends on the amount of review, customization, content, and domain setup your project needs.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="cta"><div class="eyebrow">Your next website starts here</div><h2>Bring one clear idea. Leave with something real.</h2><p class="lede" style="margin-left:auto;margin-right:auto">Start free, shape the first draft, and publish when it feels ready.</p><a class="btn" href="#top">Build your website →</a></section>
+  </main>
+
+  <footer>
+    <div class="shell"><div class="footer-grid"><div><div class="brand">RUNABLE</div><p style="color:#aaa;max-width:280px;margin-top:1rem">The AI workspace for turning ideas into useful, publishable work.</p></div><div class="footer-col"><b>Product</b><a href="#process">Websites</a><a href="#features">Features</a><a href="#pricing">Pricing</a></div><div class="footer-col"><b>Solutions</b><a href="#showcase">Small business</a><a href="#showcase">Creators</a><a href="#showcase">Teams</a></div><div class="footer-col"><b>Resources</b><a href="#templates">Templates</a><a href="#faq">FAQ</a><a href="#top">Guides</a></div><div class="footer-col"><b>Company</b><a href="#top">About</a><a href="#top">Privacy</a><a href="#top">Terms</a></div></div><div class="footer-bottom"><span>© 2026 Runable</span><span>Low-fidelity concept wireframe</span></div></div>
+  </footer>
+
+  <button class="annotation" id="notes-toggle">Hide annotations</button>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Runable Websites","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"An AI website builder for creating, editing, and publishing business websites without code.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Runable’s AI website builder?","acceptedAnswer":{"@type":"Answer","text":"A no-code tool that turns a plain-language brief into a working website draft that can be edited and published from one workspace."}},{"@type":"Question","name":"Do I need coding or design experience?","acceptedAnswer":{"@type":"Answer","text":"No. You can start from a prompt or template and edit in natural language or directly on the page."}},{"@type":"Question","name":"Can I use my own domain?","acceptedAnswer":{"@type":"Answer","text":"Yes. Connect a domain you own or search for a new one, then publish with SSL and hosting on eligible plans."}},{"@type":"Question","name":"Can I optimize my website for Google and AI answers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use clear headings, answer blocks, metadata, alt text, structured data, and fast mobile-friendly pages."}}]}
+  </script>
+  <script>
+    const reveal = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }), {threshold:.12});
+    document.querySelectorAll('[data-reveal]').forEach(el => reveal.observe(el));
+
+    const stages = [
+      ['PROMPT','What are you building?','A calm, useful website for a neighborhood bakery with online ordering.'],
+      ['GENERATE','A complete first draft','Runable maps the pages, writes the first copy, and creates a coherent visual direction.'],
+      ['REFINE','Ask for the change','“Make the menu easier to scan and add a catering inquiry section.”'],
+      ['PUBLISH','Ready for the world','Connect a domain, review the essentials, and publish with one clear action.']
+    ];
+    document.querySelectorAll('.step').forEach(step => {
+      const activate = () => { document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); step.classList.add('active'); const d=stages[+step.dataset.step]; document.querySelector('#stage-label').textContent=d[0]; document.querySelector('#stage-title').textContent=d[1]; document.querySelector('#stage-copy').textContent=d[2]; };
+      step.addEventListener('click', activate); step.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') activate(); });
+    });
+
+    const showData = {
+      Store:['ONLINE STORE','Turn products into a store people trust.','Present the range clearly, take secure payments, and keep the path from discovery to checkout simple.','[ Storefront prototype ]\\nproduct grid + cart + checkout'],
+      Bookings:['BOOKINGS','Turn open time into confirmed work.','Show availability, collect the right details, and keep scheduling simple for you and your customers.','[ Booking prototype ]\\ncalendar + service + confirmation'],
+      Portfolio:['PORTFOLIO','Make the work speak before the meeting.','Frame the strongest projects with context, proof, and a clear path for the right client to get in touch.','[ Portfolio prototype ]\\nprojects + case study + inquiry'],
+      Courses:['COURSES','Package what you know into progress.','Present the curriculum, enroll learners, and give every lesson a clear place to live.','[ Course prototype ]\\ncurriculum + enrollment + lesson'],
+      Events:['EVENTS','Give every event a home worth sharing.','Build anticipation, sell tickets, answer practical questions, and keep updates in one reliable place.','[ Event prototype ]\\nschedule + tickets + updates']
+    };
+    document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => { document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); tab.classList.add('active'); const d=showData[tab.dataset.show]; ['#show-kicker','#show-title','#show-copy','#show-art'].forEach((id,i)=>document.querySelector(id).textContent=d[i]); }));
+
+    document.querySelector('#domain-form').addEventListener('submit', e => { e.preventDefault(); const value=document.querySelector('#domain-input').value.trim() || 'yourbrand.com'; document.querySelector('#domain-result').textContent=`Wireframe result: ${value.replace(/\s+/g,'').toLowerCase()} looks like a strong option →`; });
+    document.querySelector('#billing-switch').addEventListener('click', e => { const sw=e.currentTarget; sw.classList.toggle('annual'); const annual=sw.classList.contains('annual'); document.querySelector('#billing-label').textContent=annual?'Annual billing':'Monthly billing'; document.querySelectorAll('.price[data-monthly]').forEach(p=>p.textContent='$'+(annual?p.dataset.annual:p.dataset.monthly)); });
+    document.querySelector('#notes-toggle').addEventListener('click', e => { document.body.classList.toggle('hide-notes'); e.currentTarget.textContent=document.body.classList.contains('hide-notes')?'Show annotations':'Hide annotations'; });
+  </script>
+</body>
+</html>
