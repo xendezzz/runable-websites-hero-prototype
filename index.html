@@ -36,17 +36,39 @@
     .hero { padding:clamp(4rem, 9vw, 8rem) 0 0; overflow:hidden; }
     .hero-top { display:grid; gap:2rem; }
     .hero-actions { display:flex; gap:.8rem; align-items:center; flex-wrap:wrap; }
-    .hero-stage { margin-top:4rem; height:clamp(420px, 58vw, 680px); background:#deded9; border:1px solid var(--ink); position:relative; overflow:hidden; }
-    .browser { position:absolute; width:72%; height:74%; background:#fff; border:2px solid var(--ink); left:14%; top:10%; box-shadow:22px 22px 0 rgba(0,0,0,.13); animation:float 5s ease-in-out infinite; }
+    .hero-stage { margin-top:4rem; height:clamp(560px, 67vw, 790px); background:#0d0e12; border:1px solid var(--ink); position:relative; overflow:hidden; isolation:isolate; perspective:1400px; }
+    .hero-stage::before { content:""; position:absolute; inset:0; background:radial-gradient(circle at 50% 45%,rgba(108,74,255,.25),transparent 38%),linear-gradient(125deg,#0a0b0e,#171522 52%,#090a0e); }
+    .stage-grid { position:absolute; inset:0; opacity:.16; background-image:linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px); background-size:44px 44px; transform:perspective(700px) rotateX(64deg) scale(1.5) translateY(31%); transform-origin:center bottom; }
+    .browser { position:absolute; width:min(76%,880px); height:72%; background:#fff; border:1px solid rgba(255,255,255,.64); left:12%; top:8%; border-radius:14px; box-shadow:0 45px 100px rgba(0,0,0,.55),0 0 0 1px rgba(0,0,0,.5); overflow:hidden; transform-style:preserve-3d; animation:browserFloat 8s ease-in-out infinite; transition:filter .7s ease,opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1); }
+    .browser.switching { filter:blur(16px) saturate(1.5); opacity:.25; transform:translateY(12px) translateZ(-120px) rotateX(4deg) scale(.96); }
     .browserbar { height:38px; border-bottom:1px solid var(--ink); display:flex; align-items:center; padding:0 12px; gap:6px; }
     .dot { width:8px; height:8px; border:1px solid var(--ink); border-radius:50%; }
-    .mocksite { display:grid; grid-template-columns:1.2fr .8fr; gap:24px; padding:7%; height:calc(100% - 38px); }
-    .lines span { display:block; background:#c7c7c2; height:12px; margin-bottom:12px; }
-    .lines span:nth-child(1) { height:26px; width:76%; background:#777; }
-    .lines span:nth-child(2) { width:90%; }
-    .lines span:nth-child(3) { width:66%; }
-    .mock-img { background:#aaa; min-height:180px; display:grid; place-items:center; color:#fff; font-size:.8rem; }
-    .prompt { position:absolute; width:min(520px, 80%); left:50%; bottom:6%; transform:translateX(-50%); background:#fff; border:2px solid var(--ink); padding:1rem; display:flex; justify-content:space-between; gap:1rem; box-shadow:10px 10px 0 rgba(0,0,0,.15); }
+    .mocksite { position:relative; height:calc(100% - 38px); overflow:hidden; background:var(--site-bg,#f4eee5); color:var(--site-ink,#171717); }
+    .site-nav { height:12%; display:flex; align-items:center; justify-content:space-between; padding:0 5%; font-size:11px; }
+    .site-logo { font-weight:900; letter-spacing:.12em; }
+    .site-links { display:flex; gap:18px; opacity:.62; }
+    .site-content { display:grid; grid-template-columns:1fr 1fr; height:88%; align-items:center; padding:3% 6% 7%; gap:6%; }
+    .site-kicker { font-size:10px; letter-spacing:.16em; text-transform:uppercase; margin-bottom:13px; }
+    .site-title { font:700 clamp(31px,4vw,62px)/.9 Georgia,serif; letter-spacing:-.055em; margin-bottom:17px; }
+    .site-copy { max-width:360px; font-size:12px; opacity:.7; }
+    .site-button { display:inline-flex; margin-top:22px; padding:11px 16px; color:var(--site-bg); background:var(--site-ink); border-radius:99px; font-size:11px; }
+    .site-visual { position:relative; height:82%; border-radius:150px 150px 18px 18px; background:var(--site-accent,#c8ff3d); overflow:hidden; box-shadow:0 22px 40px rgba(0,0,0,.16); }
+    .site-visual::before { content:""; position:absolute; width:62%; aspect-ratio:1; border:1px solid currentColor; border-radius:50%; left:19%; top:13%; opacity:.38; }
+    .site-visual::after { content:""; position:absolute; width:38%; height:52%; border-radius:80px 80px 8px 8px; left:31%; bottom:0; background:var(--site-ink); opacity:.84; }
+    .reveal-piece { opacity:0; filter:blur(18px); transform:translateY(20px) scale(.98); }
+    .browser.ready .reveal-piece { animation:resolve .85s cubic-bezier(.16,1,.3,1) forwards; animation-delay:var(--delay,0ms); }
+    .float-card { position:absolute; z-index:4; width:155px; padding:13px; color:#111; background:rgba(255,255,255,.91); border:1px solid rgba(255,255,255,.82); border-radius:12px; box-shadow:0 24px 45px rgba(0,0,0,.32); backdrop-filter:blur(12px); font-size:10px; }
+    .float-card strong { display:block; font-size:17px; margin-top:5px; }
+    .float-card.left { left:3%; top:28%; animation:driftLeft 8.5s ease-in-out infinite; }
+    .float-card.right { right:3%; top:18%; animation:driftRight 7s ease-in-out infinite; }
+    .float-card.middle { right:8%; bottom:17%; animation:driftMiddle 9.5s ease-in-out infinite; }
+    .mini-bars { display:flex; height:32px; gap:4px; align-items:end; margin-top:8px; }
+    .mini-bars i { flex:1; background:#7357ff; height:var(--h); border-radius:2px; }
+    .prompt { position:absolute; z-index:8; width:min(610px, 82%); left:50%; bottom:5%; transform:translateX(-50%); background:rgba(255,255,255,.96); border:1px solid rgba(255,255,255,.85); border-radius:14px; padding:1rem 1rem 1rem 1.2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; box-shadow:0 26px 70px rgba(0,0,0,.48); }
+    .prompt b { display:grid; place-items:center; width:34px; height:34px; border-radius:9px; color:#fff; background:#111; }
+    .prompt-status { position:absolute; left:50%; bottom:1.2%; transform:translateX(-50%); color:rgba(255,255,255,.55); font-size:10px; letter-spacing:.13em; text-transform:uppercase; }
+    .thermal-canvas { position:absolute; z-index:7; inset:0; width:100%; height:100%; pointer-events:none; opacity:0; mix-blend-mode:screen; image-rendering:pixelated; }
+    .thermal-canvas.active { opacity:.88; }
     .typing::after { content:""; display:inline-block; width:1px; height:1em; background:#111; margin-left:3px; vertical-align:-2px; animation:blink .8s steps(2) infinite; }
     .metrics { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--ink); }
     .metric { padding:2.2rem 4vw; border-right:1px solid var(--ink); min-height:150px; }
@@ -117,17 +139,26 @@
     body.hide-notes .note { display:none; }
     [data-reveal] { opacity:0; transform:translateY(24px); transition:.6s ease; }
     [data-reveal].visible { opacity:1; transform:none; }
-    @keyframes float { 50% { transform:translateY(-9px); } }
+    @keyframes browserFloat { 0%,100% { transform:translateY(0) rotateX(0) rotateY(-.5deg); } 50% { transform:translateY(-10px) rotateX(.7deg) rotateY(.7deg); } }
+    @keyframes driftLeft { 0%,100%{transform:translate3d(0,0,70px) rotate(-2deg)} 50%{transform:translate3d(8px,-14px,90px) rotate(1deg)} }
+    @keyframes driftRight { 0%,100%{transform:translate3d(0,0,110px) rotate(2deg)} 50%{transform:translate3d(-10px,12px,125px) rotate(-1deg)} }
+    @keyframes driftMiddle { 0%,100%{transform:translate3d(0,0,90px) rotate(-1deg)} 50%{transform:translate3d(10px,-9px,115px) rotate(1.5deg)} }
+    @keyframes resolve { to { opacity:1; filter:blur(0); transform:translateY(0) scale(1); } }
     @keyframes blink { 50% { opacity:0; } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } }
     @media (max-width:800px) {
       .shell { width:min(100% - 28px, 1180px); }
       .navlinks a:not(.btn) { display:none; }
       .section-head,.process,.mobile-grid { grid-template-columns:1fr; gap:2rem; }
-      .hero-stage { height:430px; }
-      .browser { width:88%; left:6%; }
-      .mocksite { grid-template-columns:1fr; }
-      .mock-img { min-height:100px; }
+      .hero-stage { height:560px; }
+      .browser { width:92%; left:4%; height:70%; }
+      .site-content { grid-template-columns:1fr; padding:8%; }
+      .site-visual { display:none; }
+      .site-title { font-size:42px; }
+      .float-card { width:126px; }
+      .float-card.left { left:1%; top:16%; }
+      .float-card.right { right:1%; top:9%; }
+      .float-card.middle { display:none; }
       .metrics { grid-template-columns:1fr; }
       .metric { border-right:0; border-bottom:1px solid var(--ink); }
       .metric:last-child { border-bottom:0; }
@@ -163,8 +194,14 @@
         <div class="hero-actions"><a class="btn" href="#process">Build your website →</a><a class="btn secondary" href="#templates">Explore templates</a><span class="note">SEO: one descriptive H1 + outcome-first summary</span></div>
       </div>
       <div class="hero-stage" aria-label="Wireframe animation of a website being generated">
-        <div class="browser"><div class="browserbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="mocksite"><div class="lines"><span></span><span></span><span></span><button class="btn">Primary action</button></div><div class="mock-img">GENERATED VISUAL</div></div></div>
-        <div class="prompt"><span class="typing">Create a modern site for my neighborhood bakery</span><b>↑</b></div>
+        <div class="stage-grid" aria-hidden="true"></div>
+        <div class="browser ready" id="ai-browser"><div class="browserbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="mocksite" id="generated-site"></div></div>
+        <div class="float-card left"><span>Visitors today</span><strong>2,480</strong><div class="mini-bars"><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:51%"></i><i style="--h:86%"></i><i style="--h:72%"></i></div></div>
+        <div class="float-card right"><span>New order</span><strong>+$184.00</strong><span style="color:#6250df">Paid successfully</span></div>
+        <div class="float-card middle"><span>Conversion</span><strong>8.4%</strong><span>↑ 24% this week</span></div>
+        <canvas class="thermal-canvas" id="thermal-canvas" aria-hidden="true"></canvas>
+        <div class="prompt"><span class="typing" id="hero-prompt"></span><b>↑</b></div>
+        <div class="prompt-status" id="prompt-status">Website ready</div>
       </div>
       <div class="metrics" aria-label="Product proof points">
         <div class="metric"><strong>1 prompt</strong><span>to start a complete site</span></div>
@@ -270,6 +307,58 @@
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Runable’s AI website builder?","acceptedAnswer":{"@type":"Answer","text":"A no-code tool that turns a plain-language brief into a working website draft that can be edited and published from one workspace."}},{"@type":"Question","name":"Do I need coding or design experience?","acceptedAnswer":{"@type":"Answer","text":"No. You can start from a prompt or template and edit in natural language or directly on the page."}},{"@type":"Question","name":"Can I use my own domain?","acceptedAnswer":{"@type":"Answer","text":"Yes. Connect a domain you own or search for a new one, then publish with SSL and hosting on eligible plans."}},{"@type":"Question","name":"Can I optimize my website for Google and AI answers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use clear headings, answer blocks, metadata, alt text, structured data, and fast mobile-friendly pages."}}]}
   </script>
   <script>
+    const siteConcepts = [
+      { prompt:'Create a bold website for a sustainable architecture studio', brand:'NORTH / FORM', links:['Projects','Studio','Journal'], kicker:'Architecture for a changing climate', title:'Building a lighter future.', copy:'Low-impact spaces designed for better ways of living, working, and gathering.', action:'Explore projects', bg:'#eee9de', ink:'#17221a', accent:'#bbd58b' },
+      { prompt:'Build an elegant online store for an independent fragrance house', brand:'ÉLAN', links:['Scents','Rituals','Our story'], kicker:'Botanical fragrance · London', title:'Scent, held in memory.', copy:'Small-batch botanical perfumes composed slowly and designed to stay close.', action:'Discover the collection', bg:'#f2dfd7', ink:'#3e1821', accent:'#e16852' },
+      { prompt:'Make a high-energy launch page for a creative technology studio', brand:'SIGNAL/NOISE', links:['Work','Ideas','Contact'], kicker:'Creative technology · New York', title:'Ideas that move at culture speed.', copy:'Strategy, design, and emerging technology for brands ready to make the next thing.', action:'See what we make', bg:'#dce7ff', ink:'#10142b', accent:'#7658ff' }
+    ];
+    const aiBrowser=document.querySelector('#ai-browser');
+    const generatedSite=document.querySelector('#generated-site');
+    const heroPrompt=document.querySelector('#hero-prompt');
+    const promptStatus=document.querySelector('#prompt-status');
+    const thermalCanvas=document.querySelector('#thermal-canvas');
+    const thermalCtx=thermalCanvas.getContext('2d',{alpha:true});
+    let conceptIndex=0, cycleTimer, animationFrame;
+
+    function renderConcept(c){
+      generatedSite.style.setProperty('--site-bg',c.bg); generatedSite.style.setProperty('--site-ink',c.ink); generatedSite.style.setProperty('--site-accent',c.accent);
+      generatedSite.innerHTML=`<div class="site-nav reveal-piece" style="--delay:80ms"><span class="site-logo">${c.brand}</span><span class="site-links">${c.links.map(x=>`<span>${x}</span>`).join('')}</span></div><div class="site-content"><div><div class="site-kicker reveal-piece" style="--delay:180ms">${c.kicker}</div><div class="site-title reveal-piece" style="--delay:290ms">${c.title}</div><p class="site-copy reveal-piece" style="--delay:410ms">${c.copy}</p><span class="site-button reveal-piece" style="--delay:520ms">${c.action} →</span></div><div class="site-visual reveal-piece" style="--delay:350ms"></div></div>`;
+    }
+
+    async function typePrompt(text){
+      heroPrompt.textContent='';
+      for(let i=0;i<=text.length;i++){ heroPrompt.textContent=text.slice(0,i); await new Promise(r=>setTimeout(r,20+Math.random()*18)); }
+    }
+
+    function thermalDither(){
+      cancelAnimationFrame(animationFrame);
+      const rect=thermalCanvas.getBoundingClientRect(), scale=.28;
+      thermalCanvas.width=Math.max(1,Math.floor(rect.width*scale)); thermalCanvas.height=Math.max(1,Math.floor(rect.height*scale));
+      const w=thermalCanvas.width,h=thermalCanvas.height,start=performance.now(); thermalCanvas.classList.add('active');
+      function frame(now){
+        const p=Math.min(1,(now-start)/1250), image=thermalCtx.createImageData(w,h), wave=p*(w+70)-35;
+        for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+          const i=(y*w+x)*4, ripple=12*Math.sin(y*.11+p*10), dist=Math.abs(x-wave-ripple), noise=Math.random();
+          if(dist<34 && noise>(dist/42)*.72){
+            const heat=1-dist/34; image.data[i]=255; image.data[i+1]=Math.floor(40+190*(1-heat)); image.data[i+2]=Math.floor(80+175*(1-heat)); image.data[i+3]=Math.floor(220*heat*(noise>.48?1:.34));
+          }
+        }
+        thermalCtx.putImageData(image,0,0);
+        if(p<1) animationFrame=requestAnimationFrame(frame); else { thermalCanvas.classList.remove('active'); thermalCtx.clearRect(0,0,w,h); }
+      }
+      animationFrame=requestAnimationFrame(frame);
+    }
+
+    async function changeConcept(){
+      clearTimeout(cycleTimer); conceptIndex=(conceptIndex+1)%siteConcepts.length; const c=siteConcepts[conceptIndex];
+      promptStatus.textContent='Interpreting prompt'; await typePrompt(c.prompt); await new Promise(r=>setTimeout(r,300));
+      promptStatus.textContent='Generating website'; aiBrowser.classList.remove('ready'); aiBrowser.classList.add('switching'); thermalDither();
+      await new Promise(r=>setTimeout(r,650)); renderConcept(c); aiBrowser.classList.remove('switching'); void aiBrowser.offsetWidth; aiBrowser.classList.add('ready');
+      await new Promise(r=>setTimeout(r,850)); promptStatus.textContent='Website ready'; cycleTimer=setTimeout(changeConcept,3600);
+    }
+
+    renderConcept(siteConcepts[0]); typePrompt(siteConcepts[0].prompt).then(()=>{ cycleTimer=setTimeout(changeConcept,3600); });
+
     const reveal = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }), {threshold:.12});
     document.querySelectorAll('[data-reveal]').forEach(el => reveal.observe(el));
 
