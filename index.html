@@ -135,7 +135,7 @@
     .footer-grid { display:grid; grid-template-columns:2fr repeat(4,1fr); gap:2rem; }
     .footer-col a { display:block; color:#ccc; text-decoration:none; margin:.65rem 0; font-size:.9rem; }
     .footer-bottom { border-top:1px solid #555; margin-top:3rem; padding-top:1.5rem; display:flex; justify-content:space-between; color:#aaa; font-size:.8rem; }
-    .annotation { position:fixed; right:16px; bottom:16px; z-index:30; background:#fff; border:1px solid var(--ink); padding:.6rem .8rem; cursor:pointer; box-shadow:5px 5px 0 #aaa; }
+    .annotation { display:none; }
     body.hide-notes .note { display:none; }
     [data-reveal] { opacity:0; transform:translateY(24px); transition:.6s ease; }
     [data-reveal].visible { opacity:1; transform:none; }
@@ -174,41 +174,98 @@
       .footer-grid > div:first-child { grid-column:1/-1; }
       .footer-bottom { flex-direction:column; gap:.5rem; }
     }
+
+    /* Figma hero: node 844:9017 */
+    header { position:absolute; inset:0 0 auto; z-index:30; background:transparent; border:0; backdrop-filter:none; }
+    header nav { width:min(1200px,calc(100% - 48px)); height:64px; }
+    header .brand { width:234px; display:flex; align-items:center; }
+    header .brand img { width:27px; height:24px; }
+    header .navlinks { gap:8px; }
+    header .navlinks > a:not(.nav-login):not(.nav-start) { padding:8px 13px; border:2px solid #fff; border-radius:8px; background:linear-gradient(#fff,rgba(255,255,255,.25)); box-shadow:0 2px 2px rgba(0,0,0,.04); font-size:12px; }
+    header .navlinks > a.has-menu::after { content:"⌄"; margin-left:7px; }
+    .nav-login,.nav-start { min-height:40px; padding:9px 22px; border-radius:8px; text-decoration:none; font-size:12px; }
+    .nav-login { color:#1b140e; border:2px solid #fff; background:linear-gradient(#fff,rgba(255,255,255,.25)); box-shadow:0 2px 2px rgba(0,0,0,.04); }
+    .nav-start { color:#fdfaf7; border:2px solid #fff; background:linear-gradient(#000,rgba(0,0,0,.8)); box-shadow:0 2px 2px rgba(0,0,0,.08); }
+    .hero.figma-hero { height:900px; padding:0; background:#fff; overflow:hidden; border-bottom:1px solid #171717; position:relative; }
+    .figma-hero-copy { position:absolute; z-index:10; width:min(940px,calc(100% - 40px)); top:140px; left:50%; transform:translateX(-50%); text-align:center; display:flex; flex-direction:column; align-items:center; gap:24px; }
+    .figma-hero-copy h1 { margin:0; max-width:940px; font-family:Georgia,'Times New Roman',serif; font-size:88px; font-weight:400; line-height:.955; letter-spacing:-4px; }
+    .figma-hero-copy h1 span { color:transparent; background:linear-gradient(90deg,#495469,#000); -webkit-background-clip:text; background-clip:text; }
+    .figma-hero-copy p { width:min(602px,100%); margin:16px auto 0; color:#666; font-size:16px; line-height:24px; }
+    .figma-cta { display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:12px 24px; color:#fdfaf7; background:linear-gradient(#000,rgba(0,0,0,.8)); border:2px solid #fff; border-radius:8px; box-shadow:0 2px 2px rgba(0,0,0,.04); text-decoration:none; font-size:16px; }
+    .figma-cta img { width:16px; height:16px; }
+    .hero-gallery { position:absolute; z-index:4; left:50%; top:426px; width:1170px; height:440px; transform:translateX(-50%); perspective:1200px; }
+    .hero-shot { position:absolute; margin:0; padding:8px; background:#fff; border:1px solid rgba(0,0,0,.2); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.04); transform-style:preserve-3d; transition:filter .65s ease,opacity .65s ease,transform .75s cubic-bezier(.2,.8,.2,1); overflow:hidden; }
+    .hero-shot img { width:100%; height:100%; object-fit:cover; border-radius:7px; display:block; }
+    .hero-shot.left { left:0; top:0; width:377px; height:377px; z-index:1; animation:figmaFloatLeft 8s ease-in-out infinite; }
+    .hero-shot.center { left:278px; top:78px; width:620px; height:358px; z-index:3; animation:figmaFloatCenter 9.5s ease-in-out infinite; }
+    .hero-shot.right { right:0; top:4px; width:292px; height:292px; z-index:2; animation:figmaFloatRight 7.5s ease-in-out infinite; }
+    .hero-gallery.transitioning .hero-shot { filter:blur(18px) saturate(1.55); opacity:.18; animation-play-state:paused; }
+    .hero-gallery.transitioning .hero-shot.left { transform:translate3d(-18px,8px,-110px) rotateY(6deg) scale(.96); }
+    .hero-gallery.transitioning .hero-shot.center { transform:translate3d(0,18px,-170px) rotateX(4deg) scale(.94); }
+    .hero-gallery.transitioning .hero-shot.right { transform:translate3d(18px,8px,-90px) rotateY(-6deg) scale(.96); }
+    .hero-gallery.revealing .hero-shot { opacity:0; filter:blur(20px); animation:figmaReveal .9s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-gallery.revealing .hero-shot.left { animation-delay:70ms; }
+    .hero-gallery.revealing .hero-shot.center { animation-delay:190ms; }
+    .hero-gallery.revealing .hero-shot.right { animation-delay:320ms; }
+    .figma-prompt { position:absolute; z-index:9; left:506px; top:310px; width:387px; height:97px; padding:12px 16px; border:1px solid rgba(222,222,222,.3); border-radius:12px; background:linear-gradient(#fff,rgba(255,255,255,.9)); box-shadow:0 2px 4px rgba(0,0,0,.04); display:flex; flex-direction:column; justify-content:space-between; }
+    .figma-prompt-text { font-size:16px; color:#1a1a1a; white-space:nowrap; overflow:hidden; }
+    .figma-prompt-controls { display:flex; justify-content:space-between; align-items:center; }
+    .figma-prompt-controls img:first-child { width:17px; height:17px; }
+    .submit-pill { width:36px; height:36px; border-radius:50%; background:#1a1a1a; display:grid; place-items:center; }
+    .submit-pill img { width:18px; height:18px; }
+    .figma-thermal { position:absolute; z-index:8; inset:0; width:100%; height:100%; opacity:0; pointer-events:none; mix-blend-mode:multiply; image-rendering:pixelated; }
+    .figma-thermal.active { opacity:.82; }
+    .hero-progress { position:absolute; z-index:10; left:50%; bottom:18px; transform:translateX(-50%); display:flex; gap:7px; }
+    .hero-progress button { width:28px; height:3px; padding:0; border:0; background:#d2d2d2; cursor:pointer; transition:.25s; }
+    .hero-progress button.active { width:48px; background:#171717; }
+    @keyframes figmaFloatLeft { 0%,100%{transform:translate3d(0,0,0) rotate(-.25deg)} 50%{transform:translate3d(-5px,-9px,18px) rotate(.25deg)} }
+    @keyframes figmaFloatCenter { 0%,100%{transform:translate3d(0,0,42px)} 50%{transform:translate3d(0,-11px,58px)} }
+    @keyframes figmaFloatRight { 0%,100%{transform:translate3d(0,0,18px) rotate(.2deg)} 50%{transform:translate3d(5px,-8px,30px) rotate(-.3deg)} }
+    @keyframes figmaReveal { from{opacity:0;filter:blur(20px);transform:translateY(18px) scale(.975)} to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)} }
+    @media (max-width:900px) {
+      header .brand { width:auto; }
+      header .navlinks > a:not(.nav-start) { display:none; }
+      .hero.figma-hero { height:780px; }
+      .figma-hero-copy { top:105px; }
+      .figma-hero-copy h1 { font-size:clamp(48px,12vw,72px); line-height:.95; letter-spacing:-2.5px; }
+      .figma-hero-copy p { padding:0 16px; }
+      .hero-gallery { top:405px; width:760px; transform:translateX(-50%) scale(.78); transform-origin:top center; }
+      .hero-shot.left { left:22px; }
+      .hero-shot.center { left:170px; }
+      .hero-shot.right { right:18px; }
+      .figma-prompt { left:390px; }
+    }
   </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header>
     <nav class="shell" aria-label="Primary">
-      <a href="#top" class="brand">RUNABLE</a>
-      <div class="navlinks"><a href="#process">How it works</a><a href="#templates">Templates</a><a href="#pricing">Pricing</a><a class="btn" href="#cta">Build free →</a></div>
+      <a href="#top" class="brand" aria-label="Runable home"><img src="assets/hero/runable-mark.svg" alt=""></a>
+      <div class="navlinks"><a class="has-menu" href="#features">Capabilities</a><a class="has-menu" href="#showcase">Solutions</a><a class="has-menu" href="#templates">Resources</a><a href="#faq">Community</a><a href="#pricing">Pricing</a><a class="nav-login" href="#cta">Login</a><a class="nav-start" href="#cta">Get Started</a></div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero" id="top">
-      <div class="shell hero-top" data-reveal>
-        <div class="eyebrow">AI website builder</div>
-        <h1>A real website, from one clear idea.</h1>
-        <p class="lede">Describe the business. Runable plans the pages, writes the first draft, shapes the design, and gives you a site ready to publish.</p>
-        <div class="hero-actions"><a class="btn" href="#process">Build your website →</a><a class="btn secondary" href="#templates">Explore templates</a><span class="note">SEO: one descriptive H1 + outcome-first summary</span></div>
+    <section class="hero figma-hero" id="top">
+      <div class="figma-hero-copy">
+        <div><h1>Create a website that means <span>business</span></h1><p>Runable manages planning, drafting, designing, developing and publishing your site.</p></div>
+        <a class="figma-cta" href="#process">Create your website <img src="assets/hero/arrow-ne.svg" alt=""></a>
       </div>
-      <div class="hero-stage" aria-label="Wireframe animation of a website being generated">
-        <div class="stage-grid" aria-hidden="true"></div>
-        <div class="browser ready" id="ai-browser"><div class="browserbar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div><div class="mocksite" id="generated-site"></div></div>
-        <div class="float-card left"><span>Visitors today</span><strong>2,480</strong><div class="mini-bars"><i style="--h:38%"></i><i style="--h:62%"></i><i style="--h:51%"></i><i style="--h:86%"></i><i style="--h:72%"></i></div></div>
-        <div class="float-card right"><span>New order</span><strong>+$184.00</strong><span style="color:#6250df">Paid successfully</span></div>
-        <div class="float-card middle"><span>Conversion</span><strong>8.4%</strong><span>↑ 24% this week</span></div>
-        <canvas class="thermal-canvas" id="thermal-canvas" aria-hidden="true"></canvas>
-        <div class="prompt"><span class="typing" id="hero-prompt"></span><b>↑</b></div>
-        <div class="prompt-status" id="prompt-status">Website ready</div>
+      <div class="hero-gallery" id="hero-gallery" aria-label="Examples of websites created with Runable">
+        <figure class="hero-shot left"><img id="shot-left" src="assets/hero/realestate-left.png" alt="Real estate website page"></figure>
+        <figure class="hero-shot center"><img id="shot-center" src="assets/hero/realestate-center.png" alt="Real estate website homepage"></figure>
+        <figure class="hero-shot right"><img id="shot-right" src="assets/hero/realestate-right.png" alt="Real estate website insights page"></figure>
+        <canvas class="figma-thermal" id="figma-thermal" aria-hidden="true"></canvas>
+        <div class="figma-prompt"><div class="figma-prompt-text typing" id="hero-prompt">Make a website for my real estate agency...</div><div class="figma-prompt-controls"><img src="assets/hero/add.svg" alt=""><span class="submit-pill"><img src="assets/hero/submit.svg" alt=""></span></div></div>
       </div>
-      <div class="metrics" aria-label="Product proof points">
+      <div class="hero-progress" id="hero-progress" aria-label="Website examples"></div>
+    </section>
+    <div class="metrics" aria-label="Product proof points">
         <div class="metric"><strong>1 prompt</strong><span>to start a complete site</span></div>
         <div class="metric"><strong>Minutes</strong><span>from blank page to first draft</span></div>
         <div class="metric"><strong>0 code</strong><span>needed to edit and publish</span></div>
-      </div>
-    </section>
+    </div>
 
     <section class="section" id="process">
       <div class="shell">
@@ -308,39 +365,45 @@
   </script>
   <script>
     const siteConcepts = [
-      { prompt:'Create a bold website for a sustainable architecture studio', brand:'NORTH / FORM', links:['Projects','Studio','Journal'], kicker:'Architecture for a changing climate', title:'Building a lighter future.', copy:'Low-impact spaces designed for better ways of living, working, and gathering.', action:'Explore projects', bg:'#eee9de', ink:'#17221a', accent:'#bbd58b' },
-      { prompt:'Build an elegant online store for an independent fragrance house', brand:'ÉLAN', links:['Scents','Rituals','Our story'], kicker:'Botanical fragrance · London', title:'Scent, held in memory.', copy:'Small-batch botanical perfumes composed slowly and designed to stay close.', action:'Discover the collection', bg:'#f2dfd7', ink:'#3e1821', accent:'#e16852' },
-      { prompt:'Make a high-energy launch page for a creative technology studio', brand:'SIGNAL/NOISE', links:['Work','Ideas','Contact'], kicker:'Creative technology · New York', title:'Ideas that move at culture speed.', copy:'Strategy, design, and emerging technology for brands ready to make the next thing.', action:'See what we make', bg:'#dce7ff', ink:'#10142b', accent:'#7658ff' }
+      { key:'realestate', prompt:'Make a website for my real estate agency...' },
+      { key:'atelier', prompt:'Create a bold portfolio for my creative agency...' },
+      { key:'designer', prompt:'Design an elegant site for my personal brand...' },
+      { key:'fashion', prompt:'Build a high-energy store for my fashion label...' },
+      { key:'furniture', prompt:'Make a refined shop for my furniture studio...' }
     ];
-    const aiBrowser=document.querySelector('#ai-browser');
-    const generatedSite=document.querySelector('#generated-site');
+    const gallery=document.querySelector('#hero-gallery');
     const heroPrompt=document.querySelector('#hero-prompt');
-    const promptStatus=document.querySelector('#prompt-status');
-    const thermalCanvas=document.querySelector('#thermal-canvas');
+    const shotLeft=document.querySelector('#shot-left');
+    const shotCenter=document.querySelector('#shot-center');
+    const shotRight=document.querySelector('#shot-right');
+    const progress=document.querySelector('#hero-progress');
+    const thermalCanvas=document.querySelector('#figma-thermal');
     const thermalCtx=thermalCanvas.getContext('2d',{alpha:true});
     let conceptIndex=0, cycleTimer, animationFrame;
 
-    function renderConcept(c){
-      generatedSite.style.setProperty('--site-bg',c.bg); generatedSite.style.setProperty('--site-ink',c.ink); generatedSite.style.setProperty('--site-accent',c.accent);
-      generatedSite.innerHTML=`<div class="site-nav reveal-piece" style="--delay:80ms"><span class="site-logo">${c.brand}</span><span class="site-links">${c.links.map(x=>`<span>${x}</span>`).join('')}</span></div><div class="site-content"><div><div class="site-kicker reveal-piece" style="--delay:180ms">${c.kicker}</div><div class="site-title reveal-piece" style="--delay:290ms">${c.title}</div><p class="site-copy reveal-piece" style="--delay:410ms">${c.copy}</p><span class="site-button reveal-piece" style="--delay:520ms">${c.action} →</span></div><div class="site-visual reveal-piece" style="--delay:350ms"></div></div>`;
+    function setImages(c){
+      shotLeft.src=`assets/hero/${c.key}-left.png`;
+      shotCenter.src=`assets/hero/${c.key}-center.png`;
+      shotRight.src=`assets/hero/${c.key}-right.png`;
+      progress.querySelectorAll('button').forEach((button,i)=>button.classList.toggle('active',i===conceptIndex));
     }
 
     async function typePrompt(text){
       heroPrompt.textContent='';
-      for(let i=0;i<=text.length;i++){ heroPrompt.textContent=text.slice(0,i); await new Promise(r=>setTimeout(r,20+Math.random()*18)); }
+      for(let i=0;i<=text.length;i++){ heroPrompt.textContent=text.slice(0,i); await new Promise(r=>setTimeout(r,18+Math.random()*15)); }
     }
 
     function thermalDither(){
       cancelAnimationFrame(animationFrame);
-      const rect=thermalCanvas.getBoundingClientRect(), scale=.28;
+      const rect=thermalCanvas.getBoundingClientRect(), scale=.3;
       thermalCanvas.width=Math.max(1,Math.floor(rect.width*scale)); thermalCanvas.height=Math.max(1,Math.floor(rect.height*scale));
       const w=thermalCanvas.width,h=thermalCanvas.height,start=performance.now(); thermalCanvas.classList.add('active');
       function frame(now){
-        const p=Math.min(1,(now-start)/1250), image=thermalCtx.createImageData(w,h), wave=p*(w+70)-35;
+        const p=Math.min(1,(now-start)/1200), image=thermalCtx.createImageData(w,h), wave=p*(w+80)-40;
         for(let y=0;y<h;y++) for(let x=0;x<w;x++){
-          const i=(y*w+x)*4, ripple=12*Math.sin(y*.11+p*10), dist=Math.abs(x-wave-ripple), noise=Math.random();
-          if(dist<34 && noise>(dist/42)*.72){
-            const heat=1-dist/34; image.data[i]=255; image.data[i+1]=Math.floor(40+190*(1-heat)); image.data[i+2]=Math.floor(80+175*(1-heat)); image.data[i+3]=Math.floor(220*heat*(noise>.48?1:.34));
+          const i=(y*w+x)*4, ripple=14*Math.sin(y*.1+p*9), dist=Math.abs(x-wave-ripple), noise=Math.random();
+          if(dist<38 && noise>(dist/48)*.68){
+            const heat=1-dist/38; image.data[i]=Math.floor(70+185*heat); image.data[i+1]=Math.floor(35+190*(1-Math.abs(heat-.55))); image.data[i+2]=Math.floor(255-205*heat); image.data[i+3]=Math.floor(225*heat*(noise>.5?1:.38));
           }
         }
         thermalCtx.putImageData(image,0,0);
@@ -349,15 +412,17 @@
       animationFrame=requestAnimationFrame(frame);
     }
 
-    async function changeConcept(){
-      clearTimeout(cycleTimer); conceptIndex=(conceptIndex+1)%siteConcepts.length; const c=siteConcepts[conceptIndex];
-      promptStatus.textContent='Interpreting prompt'; await typePrompt(c.prompt); await new Promise(r=>setTimeout(r,300));
-      promptStatus.textContent='Generating website'; aiBrowser.classList.remove('ready'); aiBrowser.classList.add('switching'); thermalDither();
-      await new Promise(r=>setTimeout(r,650)); renderConcept(c); aiBrowser.classList.remove('switching'); void aiBrowser.offsetWidth; aiBrowser.classList.add('ready');
-      await new Promise(r=>setTimeout(r,850)); promptStatus.textContent='Website ready'; cycleTimer=setTimeout(changeConcept,3600);
+    async function changeConcept(next=(conceptIndex+1)%siteConcepts.length){
+      clearTimeout(cycleTimer); conceptIndex=next; const c=siteConcepts[conceptIndex];
+      await typePrompt(c.prompt); await new Promise(r=>setTimeout(r,220));
+      gallery.classList.add('transitioning'); thermalDither();
+      await new Promise(r=>setTimeout(r,610)); setImages(c); gallery.classList.remove('transitioning'); gallery.classList.add('revealing');
+      await new Promise(r=>setTimeout(r,1250)); gallery.classList.remove('revealing');
+      cycleTimer=setTimeout(()=>changeConcept(),3200);
     }
 
-    renderConcept(siteConcepts[0]); typePrompt(siteConcepts[0].prompt).then(()=>{ cycleTimer=setTimeout(changeConcept,3600); });
+    siteConcepts.forEach((_,i)=>{ const button=document.createElement('button'); button.type='button'; button.setAttribute('aria-label',`Show website example ${i+1}`); button.addEventListener('click',()=>changeConcept(i)); progress.appendChild(button); });
+    setImages(siteConcepts[0]); cycleTimer=setTimeout(()=>changeConcept(),3200);
 
     const reveal = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }), {threshold:.12});
     document.querySelectorAll('[data-reveal]').forEach(el => reveal.observe(el));
