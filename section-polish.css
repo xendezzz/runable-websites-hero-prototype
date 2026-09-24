@@ -1,0 +1,18 @@
+.process-video.reveal{transform:translateY(20px) scale(.96)}
+.process-video.reveal.is-visible{transform:scale(1)}
+.feature-progress{width:min(260px,45vw);height:2px;background:#dededb;margin:20px auto 0;overflow:hidden}
+.feature-progress span{display:block;width:100%;height:100%;background:#252525;transform-origin:left;transform:scaleX(.25);transition:transform .15s linear}
+.billing-toggle{position:relative;isolation:isolate}
+.billing-slider{position:absolute;left:0;top:0;background:#171717;border-radius:6px;z-index:0;pointer-events:none;transition:translate .35s cubic-bezier(.22,1,.36,1),width .35s}
+.billing-toggle button{position:relative;z-index:1;background:transparent!important;transition:color .25s}
+.billing-toggle button.active{color:#fff}
+.faq-question::after{content:'+'!important}.faq-item.open .faq-question::after{content:'−'!important;transform:rotate(180deg)}
+.site-footer-detail a:not(.footer-brand-name){text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-position:left bottom;background-size:0 1px;background-repeat:no-repeat;transition:background-size .3s ease}
+.site-footer-detail a:not(.footer-brand-name):is(:hover,:focus-visible){background-size:100% 1px;text-decoration:none}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .features .feature-card{transform:perspective(1200px) rotateX(var(--media-rx,0deg)) rotateY(var(--media-ry,0deg)) scale(.97);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+ .features .feature-card.is-active{transform:perspective(1200px) rotateX(var(--media-rx,0deg)) rotateY(var(--media-ry,0deg)) scale(1.025)}
+ .mobile-showcase .device-media{transform:perspective(1400px) rotateX(var(--media-rx,0deg)) rotateY(var(--media-ry,0deg));transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s}
+ .mobile-showcase .device-media::before,.manage-color-reveal{background-position:center,center calc(50% + var(--backdrop-y,0px));background-size:auto,cover}
+}
+@media(prefers-reduced-motion:reduce){.feature-progress span,.billing-slider,.billing-toggle button,.site-footer-detail a{transition:none}.process-video.reveal{transform:none}}

@@ -1,0 +1,8 @@
+.inline-cta::after{content:none!important;display:none!important}
+.cta-label{display:inline-block;position:relative;overflow:hidden;vertical-align:bottom;line-height:1.4}
+.cta-label-original,.cta-label-echo{display:block;transition:transform .4s cubic-bezier(.22,1,.36,1),filter .4s;white-space:inherit}
+.cta-label-echo{position:absolute;left:0;top:100%;width:100%;filter:blur(3px)}
+@media(hover:hover) and (pointer:fine){.animated-cta:hover .cta-label-original{transform:translateY(-100%);filter:blur(3px)}.animated-cta:hover .cta-label-echo{transform:translateY(-100%);filter:blur(0)}}
+.animated-cta:focus-visible .cta-label-original{transform:translateY(-100%);filter:blur(3px)}.animated-cta:focus-visible .cta-label-echo{transform:translateY(-100%);filter:blur(0)}
+.mobile-showcase .download-actions a .cta-label-original,.mobile-showcase .download-actions a .cta-label-echo{text-decoration:none}
+@media(prefers-reduced-motion:reduce){.animated-cta .cta-label-original{transform:none!important;filter:none!important;transition:none}.animated-cta .cta-label-echo{display:none}}
