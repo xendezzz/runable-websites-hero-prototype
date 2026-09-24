@@ -1,0 +1,53 @@
+/* Figma 894:9599: the devices, not their captions, change size on scroll. */
+.mobile-showcase.page-section{height:auto;min-height:0;padding:112px max(24px,4.6875vw);overflow:clip;background:#fff;overflow-anchor:none}
+.mobile-showcase>.mobile-sticky{position:relative;top:auto;display:block;width:100%;min-height:0;margin:auto;padding:0}
+.mobile-showcase .device-intro{display:grid;width:100%;max-width:none;grid-template-columns:minmax(0,482px) minmax(0,453px);justify-content:space-between;gap:48px;margin:0 0 48px}
+.mobile-showcase .section-heading{max-width:482px;margin:0;font-size:48px;line-height:50px;letter-spacing:-.035em}
+.mobile-showcase .section-copy{max-width:429px;padding:0;font-size:14px;line-height:24px}
+.mobile-showcase .inline-cta{margin-top:16px}
+.mobile-showcase .device-grid{display:grid;grid-template-columns:var(--manage-phone-width,29%) minmax(0,1fr);gap:var(--manage-gap,24px);width:100%;min-height:var(--manage-stage-height,650px);margin:auto;align-items:start}
+.mobile-showcase .device-card,.mobile-showcase .device-card.reveal,.mobile-showcase .device-card.reveal.is-visible{position:relative;transform:none;filter:none;opacity:1;transition:none;will-change:auto}
+.mobile-showcase .device-media{width:100%;height:auto;padding:0;aspect-ratio:auto;border:0;border-radius:8px!important;background:transparent;box-shadow:none;overflow:hidden}
+.mobile-showcase .device-media::before,.mobile-showcase .dither-motion{display:none;animation:none}
+.mobile-showcase .device-mobile,.mobile-showcase .device-desktop{display:flex;align-items:center;justify-content:center;height:var(--manage-panel-height,460px);aspect-ratio:auto}
+.mobile-showcase .device-media{position:relative;isolation:isolate;background:#ededed}
+.mobile-showcase .device-mobile{--manage-backdrop:url('assets/manage/manage-sage-anime.png')}
+.mobile-showcase .device-desktop{--manage-backdrop:url('assets/manage/manage-blue-anime.png')}
+.mobile-showcase .device-media::before{content:"";display:block;position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(#ffffff66,#ffffff66),var(--manage-backdrop) center/cover no-repeat;filter:grayscale(1);transform:none;animation:none;transition:filter .55s ease}
+@media(hover:hover){.mobile-showcase .device-card:hover .device-media::before{filter:grayscale(0)}}
+.mobile-showcase .device-card:focus-within .device-media::before{filter:grayscale(0)}
+.mobile-showcase .device-media::after{content:"";position:absolute;inset:-2px;z-index:3;pointer-events:none;opacity:.14;mix-blend-mode:normal;background:repeating-conic-gradient(#000 0% 25%,transparent 0% 50%) 0 0/2px 2px;animation:manage-dither .8s steps(1,end) infinite}
+@keyframes manage-dither{0%,100%{transform:translate(0,0)}25%{transform:translate(1px,0)}50%{transform:translate(1px,1px)}75%{transform:translate(0,1px)}}
+.mobile-showcase .device-media .device-ui-image{position:relative;z-index:1;display:block;width:100%;height:100%;margin:0;object-fit:contain;object-position:center;clip-path:inset(0 round 12px);filter:none;border-radius:12px}
+.mobile-showcase .device-mobile .device-ui-image{width:auto;height:65%;max-width:65%;transform:scale(var(--manage-phone-scale,1));transform-origin:center;filter:drop-shadow(0 12px 20px #243e3326);will-change:transform}
+.mobile-showcase .device-desktop .device-ui-image{width:auto;height:auto;max-width:calc(100% - 32px);max-height:93%;transform:scale(var(--manage-desktop-scale,1));transform-origin:center;filter:drop-shadow(0 12px 24px #34508018)}
+.mobile-showcase .device-caption{padding-top:24px;max-width:391px}
+.mobile-showcase .device-caption h3{margin:0;font:700 16px/24px Satoshi,Arial,sans-serif}
+.mobile-showcase .device-caption p{margin:0;font:500 14px/24px Satoshi,Arial,sans-serif;color:#303030}
+.mobile-showcase .device-card-mobile .device-caption{min-width:min(255px,100%)}
+.mobile-showcase .download-actions{margin-top:16px}
+.mobile-showcase .download-actions a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 0;border:0;border-radius:0!important;background:none;color:#252525;box-shadow:none;font:500 12px/1.3 Satoshi,Arial,sans-serif;white-space:normal;text-decoration:none}
+.mobile-showcase .download-actions a span{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.mobile-showcase .download-actions a:hover span{text-decoration-thickness:2px}
+.mobile-showcase .download-actions a:focus-visible{outline:2px solid #252525;outline-offset:5px}
+.mobile-showcase .download-actions .store-icon{width:21px;height:21px;flex-shrink:0}
+@media(min-width:901px) and (prefers-reduced-motion:no-preference){
+ .mobile-showcase.page-section{padding-block:0}
+ .mobile-showcase>.mobile-sticky{position:sticky;top:0;height:100vh;padding:24px 0;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+ .mobile-showcase .device-intro{margin-bottom:32px}
+ .mobile-showcase .device-grid{margin:0 auto}
+ .mobile-showcase .device-intro.reveal{opacity:1;filter:none;transform:none;transition:none}
+ .mobile-showcase .device-caption{padding-top:16px}
+ .mobile-showcase .device-caption p{line-height:20px}
+ .mobile-showcase .device-card-mobile .device-caption{width:auto;max-width:391px}
+}
+@media(max-width:900px){
+ .mobile-showcase.page-section{padding:80px 24px}
+ .mobile-showcase .device-intro{grid-template-columns:1fr;gap:24px}
+ .mobile-showcase .section-heading{font-size:42px;line-height:1.06}
+ .mobile-showcase .device-grid{grid-template-columns:1fr;gap:48px;min-height:0}
+ .mobile-showcase .device-card-mobile{width:100%;margin-inline:auto}
+ .mobile-showcase .device-desktop{height:auto;min-height:220px;aspect-ratio:1.5;padding:24px 0}
+ .mobile-showcase .device-card-desktop{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.mobile-showcase .device-grid{min-height:0}.mobile-showcase .device-media::after{animation:none}.mobile-showcase .device-media::before{transition:none}}

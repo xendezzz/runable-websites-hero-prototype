@@ -1,0 +1,24 @@
+.solution-mobile-image{position:relative;isolation:isolate;overflow:hidden}
+.solution-image::before,.solution-mobile-image::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.14;background:repeating-conic-gradient(#000 0% 25%,transparent 0% 50%) 0 0/2px 2px}
+.hero .primary img,.inline-cta::after,.builder-submit img,.prompt .submit img{transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.hero .primary:is(:hover,:focus-visible) img,.inline-cta:is(:hover,:focus-visible)::after{transform:translate(3px,-3px)}
+.builder-submit:not(:disabled):is(:hover,:focus-visible) img,.prompt:is(:hover,:focus-visible) .submit img{transform:translateX(3px)}
+.builder-submit:hover{transform:none}
+@media(prefers-reduced-motion:reduce){.hero .primary img,.inline-cta::after,.builder-submit img,.prompt .submit img{transition:none!important;transform:none!important}}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .solution-image{transform:translateY(-50%) perspective(1000px) rotateX(var(--cursor-rx,0deg)) rotateY(var(--cursor-ry,0deg));transition:top 1.05s cubic-bezier(.16,1,.3,1),box-shadow .5s ease,transform .5s var(--ease)}
+  .solution-mobile-image{transform:perspective(1000px) rotateX(var(--cursor-rx,0deg)) rotateY(var(--cursor-ry,0deg));transition:transform .5s var(--ease)}
+  .solution-image.cursor-following,.solution-mobile-image.cursor-following{transition-duration:1.05s,.5s,.18s}
+}
+.solution-image::after,.solution-mobile-image::after{content:"";position:absolute;z-index:3;inset:35% 0 0;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.12) 25%,rgba(255,255,255,.5) 65%,rgba(255,255,255,.9) 100%);opacity:0;transform:translateY(32%);transition:opacity .45s ease,transform .65s var(--ease)}
+.template-action{position:absolute;z-index:4;bottom:16px;right:16px;display:flex;align-items:center;min-height:34px;padding:7px 14px;border:1px solid #ffffff60;border-radius:5px;background:#171717;color:#fff;font:500 13px/18px Satoshi,Arial,sans-serif;box-shadow:0 2px 8px #0000000a;cursor:pointer;opacity:0;filter:blur(7px);transform:translateY(20px);transition:opacity .4s ease,filter .5s var(--ease),transform .6s var(--ease),background .2s}
+.solution-image:hover .template-action,.solution-image:focus-within .template-action,.solution-mobile-image:hover .template-action,.solution-mobile-image:focus-within .template-action{opacity:1;filter:blur(0);transform:none}
+.solution-image:hover::after,.solution-image:focus-within::after,.solution-mobile-image:hover::after,.solution-mobile-image:focus-within::after{opacity:1;transform:none}
+.template-action:hover{background:#353535}
+.template-action:focus-visible,.feature-playback:focus-visible{outline:2px solid #171717;outline-offset:4px}
+.feature-playback{position:absolute;right:16px;top:16px;z-index:3;min-width:44px;height:44px;display:grid;place-items:center;padding:0 14px;border:1px solid #17171720;border-radius:24px;background:#fffffff0;color:#171717;font:500 13px/18px Satoshi,Arial,sans-serif;cursor:pointer;box-shadow:0 2px 8px #00000008}
+@media(hover:none),(pointer:coarse){.template-action{opacity:1;filter:blur(0);transform:none}.solution-image::after,.solution-mobile-image::after{opacity:1;transform:none}}
+@media(max-width:1100px){.solution-mobile-image .template-action{opacity:1;filter:blur(0);transform:none;bottom:14px;right:14px}.solution-mobile-image::after{opacity:1;transform:none}.accordion-item.open .solution-mobile-image::after{animation:templateLayerIn .65s var(--ease) both}.accordion-item.open .template-action{animation:templateActionIn .6s var(--ease) .08s both}}
+@keyframes templateLayerIn{from{opacity:0;transform:translateY(32%)}to{opacity:1;transform:none}}
+@keyframes templateActionIn{from{opacity:0;filter:blur(7px);transform:translateY(20px)}to{opacity:1;filter:blur(0);transform:none}}
+@media(prefers-reduced-motion:reduce){.template-action,.solution-image::after,.solution-mobile-image::after{transition:none;animation:none!important;transform:none}.accordion-item.open .template-action{animation:none!important}}

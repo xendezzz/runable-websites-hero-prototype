@@ -1,0 +1,16 @@
+@media(prefers-reduced-motion:no-preference){
+ .cta-label-original,.cta-label-echo{transition-duration:.55s;transition-timing-function:cubic-bezier(.22,1,.36,1)}
+ .inline-cta,.get-started,.footer-build,.hero .primary{transition:translate .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease,background-color .35s ease}
+ .solution-image.cursor-following,.solution-mobile-image.cursor-following{transition-duration:1.15s,.65s,.38s}
+ .solution-image img{transition-duration:1s,1.1s,1.15s}
+ .faq-answer{transition:grid-template-rows .65s cubic-bezier(.22,1,.36,1)}
+ .faq-question::after{transition:transform .55s cubic-bezier(.22,1,.36,1)}
+ .plan-extra{transition:grid-template-rows .65s cubic-bezier(.22,1,.36,1),opacity .5s ease}
+ .billing-slider{transition:translate .5s cubic-bezier(.22,1,.36,1),width .5s cubic-bezier(.22,1,.36,1)}
+ .manage-color-reveal,.mobile-showcase .device-media::before{transition:opacity .7s ease,filter .7s ease}
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .features .feature-card{transition:transform .6s cubic-bezier(.22,1,.36,1)}
+ .mobile-showcase .device-media{transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s ease}
+ .process-video.reveal.is-visible:not(.in-demo-dialog){transition:opacity 1s ease,filter 1.1s ease,transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s ease}
+}

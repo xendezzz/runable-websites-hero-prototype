@@ -1,0 +1,17 @@
+/* Brief focus/blur gestures; never blur a paragraph while it is being read. */
+.price-card{transition:translate .45s cubic-bezier(.22,1,.36,1),box-shadow .45s,border-color .3s}
+.inline-cta,.get-started,.footer-build,.hero .primary{transition:translate .28s ease,box-shadow .28s ease,background-color .28s ease}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .inline-cta:hover,.get-started:hover,.footer-build:hover,.hero .primary:hover{translate:0 -3px;box-shadow:0 8px 22px #0002}
+ .price-card:hover,.price-card:focus-within{translate:0 -7px;box-shadow:0 20px 50px #0000000d}
+ .device-card .device-media{transition:box-shadow .5s ease}
+ .device-card:hover .device-media{box-shadow:0 15px 38px #00000014}
+}
+.inline-cta:active,.get-started:active,.footer-build:active,.hero .primary:active{translate:0 1px}
+.accordion-link,.download-actions a span,.site-footer-detail a{transition:text-underline-offset .25s,color .25s}
+.download-actions a:hover span{ text-underline-offset:9px }
+.faq-question::after{transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.faq-item.open .faq-question::after{transform:rotate(180deg)}
+@media(prefers-reduced-motion:reduce){
+ .price-card,.inline-cta,.get-started,.footer-build,.hero .primary,.faq-question::after,.download-actions a span{transition:none!important;translate:none!important}
+}

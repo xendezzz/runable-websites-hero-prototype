@@ -1,0 +1,50 @@
+/* Cross-section design system; preserves approved media treatments. */
+.pricing.page-section{background:#ffffff}
+@media(min-width:901px){
+ /* Both rows share one grid, so category labels line up with the intro CTA. */
+ .solutions .solutions-intro,.solutions .solutions-interactive{grid-template-columns:minmax(250px,.72fr) minmax(430px,1.28fr);gap:clamp(64px,10vw,160px);width:100%;margin-inline:0}
+ .solutions .accordion{width:100%;max-width:766px}
+ .solutions .solution-image{max-width:541px;left:auto;right:0}
+}
+.page-section .section-heading{font-size:clamp(42px,3.5vw,56px);line-height:1.08;letter-spacing:-.035em}
+.page-section:is(.trust,.process,.solutions,.pricing,.faq){padding-block:96px;min-height:0}
+.page-section .section-intro{align-items:start}
+.section-intro.reveal,.trust.reveal,.faq .reveal,.pricing .reveal,.accordion.reveal,.section-heading.reveal{filter:none;opacity:1;transform:none;transition:none}
+.solutions .accordion-item:not(.open) .accordion-trigger{color:#767676}
+.solutions .accordion-item:not(.open){opacity:1}
+.solutions .accordion-item:not(.open) .accordion-trigger span{color:inherit}
+.solutions .accordion-trigger:is(:hover,:focus-visible){color:#252525}
+:is(a,button,input,textarea,summary,[tabindex="0"]):focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.billing-toggle button{min-height:44px}
+.template-use-cta{min-height:44px}
+.feature-track:focus-visible{outline-offset:-4px}
+.features.is-compact{height:auto!important;padding-block:72px}
+.features.is-compact .features-sticky{position:relative;height:auto;min-height:0;overflow:visible;padding:0}
+.features.is-compact .feature-track{width:100%;overflow-x:auto;transform:none!important;scroll-snap-type:x mandatory;padding-block:12px 24px}
+.features.is-compact .feature-card{flex-basis:min(520px,86vw);scroll-snap-align:center}
+.mobile-showcase.is-compact.page-section{height:auto!important;padding-block:80px}
+.mobile-showcase.is-compact>.mobile-sticky{position:relative;height:auto;min-height:0;padding:0}
+.mobile-showcase.is-compact .device-grid{min-height:0}
+.mobile-showcase.is-compact .device-media{height:380px}
+.mobile-showcase.is-compact .device-card{transform:none}
+.nav-item.menu::after{display:none}
+@media(max-width:900px){
+ .page-section .section-heading{font-size:36px;line-height:1.1;max-width:100%}
+ .page-section:is(.trust,.process,.solutions,.pricing,.faq){padding:72px 24px}
+ .features .section-intro{margin-inline:auto;width:calc(100% - 48px)}
+ .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:32px}
+ .metric strong{font-size:clamp(26px,7vw,42px);line-height:1.1;font-variant-numeric:tabular-nums}
+ .metric span{font-size:12px;line-height:17px;margin-top:10px}
+ .trust-kicker{max-width:430px;margin-inline:auto}
+ .mobile-showcase.is-compact .device-mobile{height:420px}
+ .mobile-showcase.is-compact .device-desktop{height:auto;min-height:220px}
+ .pricing-grid{margin-top:40px}
+ .features.is-compact .feature-card{display:flex;flex-direction:column;height:auto;aspect-ratio:auto;background:#fff;align-self:stretch}
+ .features.is-compact .feature-card video{height:auto;aspect-ratio:1042/990;flex:none}
+ .features.is-compact .feature-caption{position:relative;inset:auto;margin-top:-15%;padding:16px 20px 24px}
+ .features.is-compact .feature-caption p{line-height:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto!important}
+ .reveal{opacity:1;filter:none;transform:none;transition:none}
+}
