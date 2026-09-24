@@ -16,7 +16,7 @@
 .footer-invitation>p{font-size:15px;line-height:1.6;color:#aaa;margin:0 0 28px}
 .footer-build{display:inline-flex;align-items:center;gap:22px;min-height:48px;padding:14px 22px;background:#fff;color:#141414;border:0;border-radius:6px;font:500 14px/1.2 Satoshi,Arial,sans-serif;cursor:pointer;transition:background .2s,transform .2s}
 .footer-build:hover{background:#e6e6e6;transform:translateY(-2px)}
-.footer-build span{display:inline-block;font-size:20px;transition:transform .25s}
+.footer-build span{display:inline-block;font-size:16px;font-weight:400;transition:transform .25s}
 .footer-build:hover span{transform:translate(3px,-3px)}
 .floating-footer a:focus-visible,.footer-build:focus-visible{outline:2px solid #fff;outline-offset:6px}
 .footer-bottom{position:relative;z-index:2;display:flex;align-items:center;gap:28px;padding:28px max(24px,4.6875vw);border-top:1px solid #ffffff20;font-size:12px;color:#999;background:#101010}
@@ -38,8 +38,8 @@
 .footer-templates::after{right:0;background:linear-gradient(to left,#101010,#101010c0 30%,#10101000)}
 .footer-templates .footer-float:nth-child(n){display:block;left:50%;right:auto;top:0;bottom:auto;width:clamp(250px,25vw,380px);transition:none;transform-origin:top center;will-change:transform}
 .footer-float img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;background:#181818;border:0;border-radius:8px;animation:none;box-shadow:0 14px 32px #0005}
-.footer-build{position:relative;z-index:150;top:auto;left:auto;transform:none;margin-top:24px;background:#fff;color:#171717;border:0;border-radius:8px;backdrop-filter:none;padding:11px 21px;min-height:48px;font:500 15px/22px Satoshi,Arial,sans-serif;white-space:nowrap}
-.footer-build:hover{transform:translateY(-2px);background:#e6e6e6}
+.footer-build{position:relative;z-index:150;top:auto;left:auto;display:inline-flex;align-items:center;gap:8px;transform:none;margin-top:26px;padding:8px 20px;min-height:45px;color:#171717;background:#fff;border:2px solid #171717;border-radius:8px;box-shadow:0 6px 18px rgba(255,255,255,.09);backdrop-filter:none;font:400 16px/24px Satoshi,Arial,sans-serif;letter-spacing:-.1px;white-space:nowrap}
+.footer-build:hover{background:#f1f1f1}
 @media(min-width:1600px){
  .footer-templates .footer-float:nth-child(n){width:clamp(380px,20vw,760px)}
  .footer-stage{height:clamp(820px,calc(640px + 12vw),1120px)}

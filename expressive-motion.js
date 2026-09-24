@@ -16,7 +16,8 @@
   document.querySelector('.features .inline-cta').addEventListener('click',()=>{scrollTo('#feature-track');document.querySelector('#feature-track').focus({preventScroll:true})});
   document.querySelector('.device-intro .inline-cta').addEventListener('click',()=>{scrollTo('.device-grid');document.querySelector('.device-card-mobile .download-actions a').focus({preventScroll:true})});
   document.querySelector('.get-started').textContent='Start building';
-  document.querySelector('.footer-build').textContent='Bring my idea to life';
+  document.querySelector('.footer-build').textContent='Build my website';
+  document.querySelectorAll('.pricing-compare').forEach(element=>element.remove());
   const stop=()=>{running.forEach(animation=>animation.cancel());running.clear()};
   reduced.addEventListener('change',()=>{if(reduced.matches)stop()});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
