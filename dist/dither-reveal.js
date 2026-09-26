@@ -104,9 +104,10 @@
   }
   function enter(el,index) {
     if(!pending.has(el)) return;
-    if(reduced.matches||document.hidden||active.size>=5) {finish(el);return;}
+    if(reduced.matches||document.hidden) {finish(el);return;}
     try {
-      const points=sample(el);
+      // Keep every reveal; bound expensive particle sampling during busy entrances.
+      const points=active.size<5 ? sample(el) : [];
       pending.delete(el); observer.unobserve(el);
       el.classList.replace('dither-pending','dither-entering');
       active.set(el,{points,start:performance.now()+Math.min(index*65,195),mask:-1});
@@ -116,12 +117,11 @@
   const observer=new IntersectionObserver(entries=>{
     entries.filter(e=>e.isIntersecting).forEach((entry,i)=>enter(entry.target,i));
   },{threshold:.08,rootMargin:'0px 0px -35px 0px'});
-  const selector='.trust-kicker,.metric,.section-intro .section-heading,.section-intro .section-copy,.section-intro .inline-cta,.process-video,.solution-image,.accordion-trigger,.accordion-body,.feature-card,.device-media,.device-caption,.pricing-top,.price-card,.faq .section-heading,.faq-item,.footer-invitation,.footer-column,.footer-brand,.footer-mantra';
+  const selector='.hero .nav,.hero .copy h1,.hero .copy p,.hero .copy .primary,.scene-window,.trust-kicker,.metric,.section-intro .section-heading,.section-intro .section-copy,.section-intro .inline-cta,.process-video,.solution-image,.accordion-trigger,.accordion-body,.feature-card,.device-media,.device-caption,.pricing-top,.price-card,.pricing-links,.sales-strip,.faq .section-heading,.faq-item,.footer-float,.footer-invitation,.footer-top,.footer-column,.footer-brand,.footer-legal,.footer-mantra';
   const candidates=[...document.querySelectorAll(selector)];
   const targets=candidates.filter(el=>!candidates.some(parent=>parent!==el&&parent.contains(el)));
   if(!reduced.matches) targets.forEach(el=>{
-    if(el.getBoundingClientRect().top<innerHeight*.8) return;
-    pending.add(el);el.classList.add('dither-pending');observer.observe(el);
+    el.dataset.ditherReveal='';pending.add(el);el.classList.add('dither-pending');observer.observe(el);
   });
   document.addEventListener('focusin',event=>{
     for(const el of [...pending,...active.keys()]) if(el.contains(event.target)) finish(el);
