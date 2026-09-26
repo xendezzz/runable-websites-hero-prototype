@@ -1,0 +1,7 @@
+/* Replace the old blur entrances, without changing layout or scroll transforms. */
+.reveal{opacity:1!important;filter:none!important;transition-delay:0s!important}
+.reveal:not(.feature-track){transform:none!important}
+.dither-particles{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.dither-pending,.dither-entering{mask-image:var(--dither-mask,linear-gradient(transparent,transparent));mask-size:12px 12px;mask-repeat:repeat}
+@media(prefers-reduced-motion:reduce){.dither-particles{display:none}.dither-pending,.dither-entering{mask-image:none!important}}
+@media print{.dither-particles{display:none}.dither-pending,.dither-entering{mask-image:none!important}}
