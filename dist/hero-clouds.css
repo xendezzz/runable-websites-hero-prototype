@@ -1,0 +1,20 @@
+/* Atmosphere only: the typography, controls and previews remain above this layer. */
+.hero .color-stack{z-index:-1}
+.hero-clouds{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;isolation:isolate;mask-image:linear-gradient(#000 0%,#000 65%,transparent 100%)}
+.hero-cloud-layer{position:absolute;inset:-6%;background:url('assets/hero/clouds-soft.png') center 30%/cover no-repeat;opacity:.72;animation:heroCloudDrift 34s ease-in-out infinite alternate;will-change:transform}
+.hero-cloud-layer-back{inset:-14%;opacity:.22;background-position:70% 10%;animation:heroCloudDriftBack 46s ease-in-out infinite alternate}
+/* One CSS-pixel stipples on a two-pixel lattice; confined to the clouds. */
+.hero-clouds::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at .5px .5px,rgba(70,95,112,.14) .5px,transparent .65px);background-size:2px 2px;opacity:.5;mask-image:linear-gradient(#000,rgba(0,0,0,.6) 55%,transparent 95%);pointer-events:none}
+@keyframes heroCloudDrift{from{transform:translate3d(-2%,0,0) scale(1.02)}to{transform:translate3d(2%,-1.5%,0) scale(1.06)}}
+@keyframes heroCloudDriftBack{from{transform:translate3d(2%,-1%,0) scale(1.06)}to{transform:translate3d(-2%,1.5%,0) scale(1.02)}}
+@media(max-width:700px){.hero-cloud-layer{background-position:40% top}.hero-clouds{mask-image:linear-gradient(#000 0%,#000 55%,transparent 90%)}}
+@media(prefers-reduced-motion:reduce){.hero-cloud-layer{animation:none;will-change:auto}}
+/* Use the existing animated scene wash as the cloud palette. Neutral cloud
+   luminance multiplies into that wash, so no separate color timer can drift. */
+.hero-clouds{mix-blend-mode:multiply}
+.hero-cloud-layer{filter:grayscale(1);opacity:.6}
+.hero-cloud-layer-back{opacity:.18}
+.hero-clouds::after{background-image:radial-gradient(circle at .5px .5px,rgba(52,48,44,.14) .5px,transparent .65px)}
+/* A soft white reading zone sits above the atmosphere, below hero content. */
+.hero::after{content:"";position:absolute;z-index:0;pointer-events:none;left:12%;right:12%;top:5%;height:65%;background:radial-gradient(ellipse at 50% 38%,rgba(255,255,255,.9) 0%,rgba(255,255,255,.76) 32%,rgba(255,255,255,.35) 58%,transparent 78%);filter:blur(36px)}
+@media(max-width:700px){.hero::after{left:2%;right:2%;top:4%;height:57%;filter:blur(24px)}}
